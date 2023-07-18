@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             TextButton(
               onPressed: () {
-                                            Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/login');
               },
               child: const Text(
                 "Log in",
