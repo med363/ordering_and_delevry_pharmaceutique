@@ -13,6 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      //  theme: ThemeData(
+          // drawerTheme: const DrawerThemeData(scrimColor: Colors.white)),
+
       title: 'ordering delivry pharmaceutique',
       home:  MyHomePage(title: 'Flutter Demo Home Page'),
     );
