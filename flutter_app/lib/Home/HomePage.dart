@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../Core/Colors/Hex_Color.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,10 +29,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true, // Important: extend body behind AppBar
+
         appBar: AppBar(
+          
+
           backgroundColor: Colors.transparent,
           elevation: 0,
-          shadowColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
           // Set the color of the drawer icon
           actions: [
@@ -49,7 +54,27 @@ class _HomePageState extends State<HomePage> {
         //inside the body
         body: Stack(children: [
           Container(
-            color: Colors.white,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: const [0.1, 0.4, 0.7, 0.9],
+            colors: [
+              HexColor("#4b4293").withOpacity(0.8),
+              HexColor("#4b4293"),
+              HexColor("#08418e"),
+              HexColor("#08418e")
+            ],
+          ),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
+            image: AssetImage('assets/images/1.jpg'),
+          ),
+        ),
+
+            // color: Colors.white,
             // decoration: BoxDecoration(
             //   image: DecorationImage(
             //       imacloge: AssetImage("../../icons/background.jpg"),
@@ -86,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                             child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
-                            '../../icons/${images[index]}', // Replace with your image path
+                            'assets/images/${images[index]}', // Replace with your image path
                             fit: BoxFit.cover,
                           ),
                         )));
