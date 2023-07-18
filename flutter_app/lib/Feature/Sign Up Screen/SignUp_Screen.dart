@@ -5,9 +5,15 @@ import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
 import '../Login Screen/Login_Screen.dart';
 
-
-
-enum FormData { Name, Phone, Email, Gender, password, ConfirmPassword,Profession }
+enum FormData {
+  Name,
+  Phone,
+  Email,
+  Gender,
+  password,
+  ConfirmPassword,
+  Profession
+}
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -22,8 +28,6 @@ class _SignupScreenState extends State<SignupScreen> {
   bool ispasswordev = true;
   bool isProfessional = false;
   bool showImageField = false;
-
-  
 
   FormData? selected;
 
@@ -53,7 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-             image: AssetImage('assets/images/1.jpg'),
+            image: AssetImage('assets/images/1.jpg'),
           ),
         ),
         child: Center(
@@ -380,67 +384,78 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                         ),
-                         const SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-FadeAnimation(
-  delay: 1,
-  child: Container(
-    width: 300,
-    height: 40,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(12.0),
-      color: selected == FormData.Profession ? enabled : backgroundColor,
-    ),
-    padding: const EdgeInsets.all(5.0),
-    child: InkWell(
-      onTap: () async {
-        setState(() {
-          selected = FormData.Profession;
-        });
+                        FadeAnimation(
+                          delay: 1,
+                          child: Container(
+                            width: 300,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              color: selected == FormData.Profession
+                                  ? enabled
+                                  : backgroundColor,
+                            ),
+                            padding: const EdgeInsets.all(5.0),
+                            child: InkWell(
+                              onTap: () async {
+                                // Open the image picker
+                                PickedFile? imageFile =
+                                    await ImagePicker().getImage(
+                                  source: ImageSource
+                                      .camera, // Use the camera to take a picture
+                                );
 
-        // Open the image picker
-        PickedFile? imageFile = await ImagePicker().getImage(
-          source: ImageSource.camera, // Use the camera to take a picture
-        );
-
-        // Process the selected image (you can save it, display it, etc.)
-        if (imageFile != null) {
-          // Do something with the image, e.g., save it to a file or display it
-          // For now, we'll just print the image path
-          print("Image Path: ${imageFile.path}");
-        } else {
-          // User canceled or something went wrong with the image picker
-          print("Image picker canceled or error occurred.");
-        }
-      },
-      child: ListTile(
-        leading: Icon(
-          Icons.medical_services,
-          color: selected == FormData.Profession ? enabledtxt : deaible,
-          size: 20,
-        ),
-        title: Text(
-          'Êtes-vous professionnel de santé ?',
-          style: TextStyle(
-            color: selected == FormData.Profession ? enabledtxt : deaible,
-            fontSize: 12,
-          ),
-        ),
-        trailing: Radio<bool>(
-          value: true,
-          groupValue: isProfessional,
-          onChanged: (value) {
-            setState(() {
-              isProfessional = value!;
-            });
-          },
-        ),
-      ),
-    ),
-  ),
-),
-            
+                                // Process the selected image (you can save it, display it, etc.)
+                                if (imageFile != null) {
+                                  // Do something with the image, e.g., save it to a file or display it
+                                  // For now, we'll just print the image path
+                                  print("Image Path: ${imageFile.path}");
+                                } else {
+                                  // User canceled or something went wrong with the image picker
+                                  print(
+                                      "Image picker canceled or error occurred.");
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.medical_services,
+                                      color: selected == FormData.Profession
+                                          ? enabledtxt
+                                          : deaible,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      'Êtes-vous professionnel de santé ?',
+                                      style: TextStyle(
+                                        color: selected == FormData.Profession
+                                            ? enabledtxt
+                                            : deaible,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                  Radio<bool>(
+                                    value: true,
+                                    groupValue: isProfessional,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isProfessional = value!;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(
                           height: 25,
                         ),
