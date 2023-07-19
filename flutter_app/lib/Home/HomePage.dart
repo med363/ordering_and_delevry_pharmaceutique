@@ -111,8 +111,8 @@ Container(
         width: 200,
         margin: EdgeInsets.symmetric(horizontal: 8),
         child: Card(
-          elevation: 4, // Adjust the elevation value for the shadow effect
-          color: Color(0xFFABCDEF), // Replace with your desired "crystal" color
+          elevation: 20, // Adjust the elevation value for the shadow effect
+          color: Color.fromARGB(255, 128, 130, 173), // Replace with your desired "crystal" color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -146,6 +146,66 @@ Container(
       );
     },
   ),
+),
+          Container(
+            padding: const EdgeInsets.only(top: 510, left: 10, right: 10),
+            child: Column(
+              children: [
+                Text(
+                  "Categories",
+                  style: GoogleFonts.oswald(
+                      color: Colors.black,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+Container(
+  padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
+  child: ListView.builder(
+    itemBuilder: (context, index) {
+      return Card(
+        elevation: 20,
+        color: Color.fromARGB(255, 128, 130, 173), // Replace with your desired "crystal" color
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  'assets/images/med.png', // Replace with the image path
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 120,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                "name", // Replace with the product name
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 4),
+              Text("price", // Replace with the product price
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  ),
 )
 
 
@@ -154,29 +214,6 @@ Container(
             width: 275,
             elevation: 30,
             backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.horizontal(right: Radius.circular(30))),
-            child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: const [0.1, 0.4, 0.7, 0.9],
-                    colors: [
-                      HexColor("#4b4293").withOpacity(0.5),
-                      HexColor("#4b4293").withOpacity(0.8),
-                      HexColor("#08418e"),
-                      HexColor("#08418e")
-                    ],
-                  ),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                        HexColor("#fff").withOpacity(0.3), BlendMode.dstATop),
-                    image: AssetImage('assets/images/1.jpg'),
-                  ),
-                ),
                 child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
                     child: Column(
@@ -209,18 +246,8 @@ Container(
                               ),
                             )
                           ]),
-                        ])))));
+                        ]))));
   }
 
-  _getColorByIndex(int index) {
-    List<Color> colors = [
-      Colors.red,
-      Colors.blue,
-      Colors.green,
-      Colors.yellow,
-      Colors.orange,
-      Colors.purple,
-    ];
-    return colors[index % colors.length];
-  }
+
 }
