@@ -28,7 +28,8 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+        return 
+         Scaffold(
         extendBodyBehindAppBar: true, // Important: extend body behind AppBar
 
         appBar: AppBar(
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             //       fit: BoxFit.cover ))
           ),
           Container(
-            padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
             child: Column(
               children: [
                 Text(
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-              padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
+              padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
               height: 200, // Adjust the height as needed
               child: ListView.builder(
                   scrollDirection:

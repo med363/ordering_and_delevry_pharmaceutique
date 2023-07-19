@@ -28,7 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home:
+    Scaffold(
+      
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -293,6 +297,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

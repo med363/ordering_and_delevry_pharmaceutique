@@ -39,7 +39,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home:
+    Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -525,6 +528,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

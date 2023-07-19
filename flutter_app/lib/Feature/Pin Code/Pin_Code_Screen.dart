@@ -53,8 +53,10 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home:
+    Scaffold(      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -334,6 +336,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

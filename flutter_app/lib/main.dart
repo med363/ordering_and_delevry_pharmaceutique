@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Set to false to remove the debug banner
+    debugShowCheckedModeBanner: false, // Set to false to remove the debug banner
+
       //  theme: ThemeData(
           // drawerTheme: const DrawerThemeData(scrimColor: Colors.white)),
 
@@ -39,6 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     
 return MaterialApp(
+        debugShowCheckedModeBanner: false, // Set to false to remove the debug banner
+
       home: HomePage(),
       routes: {
         '/login': (context) => LoginScreen(),
