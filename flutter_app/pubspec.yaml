@@ -36,8 +36,11 @@ dependencies:
   supercharged: ^2.1.1
   build_runner: ^2.1.11
   build_web_compilers: ^3.2.3
-  pin_code_fields: ^7.4.0
+  pin_code_fields: ^7.4.0 
   image_picker: ^0.8.4+4
+  flutter_svg: ^0.22.0 
+  #http: ^0.12.2 #help fetch data from API
+
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +73,8 @@ flutter:
     - assets/images/med.png
     - assets/images/medicament.png
     - assets/images/pharmacie.png
+    - assets/images/menu.svg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
