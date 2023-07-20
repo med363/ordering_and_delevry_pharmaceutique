@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../Core/Colors/Hex_Color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             //   ),
             // ),
 
-            color: Colors.white38,
+            color: Colors.white.withOpacity(0.16),
             // decoration: BoxDecoration(
             //   image: DecorationImage(
             //       imacloge: AssetImage("../../icons/background.jpg"),
@@ -112,36 +113,53 @@ Container(
         margin: EdgeInsets.symmetric(horizontal: 8),
         child: Card(
           elevation: 20, // Adjust the elevation value for the shadow effect
-          color: Color.fromARGB(255, 128, 130, 173), // Replace with your desired "crystal" color
+          color: Colors.white.withOpacity(0.16), // Replace with your desired "crystal" color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/images/${images[index]}',
-                  fit: BoxFit.contain, // Adjust the fit property for resizing the image
-                  width: 120, // Adjust the width value as needed
-                  height: 120, // Adjust the height value as needed
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/images/med.png",
+                  height: 200,),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Name', // Replace with the actual name
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                Text("medical",
+                style: TextStyle(fontSize: 23,
+                fontWeight: FontWeight.bold
+                ),
+                ),
+                SizedBox(height: 6,),
+                RatingBar.builder(
+                  initialRating: 4, 
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  itemCount: 5,
+                  itemSize: 16,
+                  itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Colors.red,
+                  ), onRatingUpdate: (index) {  },
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: [
+                      Text(
+                        "\$10",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.red,
+                        ),
+                        
+                      )
+                    ]
+
+                  )
+                 
+              ],
+            ),)
         ),
       );
     },
@@ -150,6 +168,7 @@ Container(
           Container(
             padding: const EdgeInsets.only(top: 510, left: 10, right: 10),
             child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Categories",
@@ -164,10 +183,12 @@ Container(
 Container(
   padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
   child: ListView.builder(
+    // scrollDirection: Axis.horizontal,
+
     itemBuilder: (context, index) {
       return Card(
         elevation: 20,
-        color: Color.fromARGB(255, 128, 130, 173), // Replace with your desired "crystal" color
+        color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.6), // Replace with your desired "crystal" color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
