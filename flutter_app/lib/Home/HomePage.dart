@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../Core/Colors/Hex_Color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             //   ),
             // ),
 
-            color: Colors.white.withOpacity(0.16),
+            color: Colors.transparent,
             // decoration: BoxDecoration(
             //   image: DecorationImage(
             //       imacloge: AssetImage("../../icons/background.jpg"),
@@ -102,6 +103,62 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 Container(
+              padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
+
+      height: 250, // Set the desired height of the scrolling area
+      child: ListView(
+        scrollDirection: Axis.horizontal, // Set the scroll direction to horizontal
+        children: [
+          buildCard(),
+          SizedBox(width: 12,),
+          buildCard(),
+          SizedBox(width: 12,),
+          buildCard()
+        //   Padding(
+        //     padding: EdgeInsets.all(8.0),
+        //     child:
+            
+        //       GestureDetector(
+        //       onTap: () {
+        //         // Add your logic here for when the pharmacy icon is pressed
+        //         print('Pharmacy Icon Pressed!');
+        //       },
+        //       child: Icon(FontAwesomeIcons.medkit, size: 48, color: Colors.blue),
+             
+        //     ),
+             
+             
+        //   ),
+
+        //   Padding(
+        //     padding: EdgeInsets.all(8.0),
+        //     child: GestureDetector(
+        //       onTap: () {
+        //         // Add your logic here for when the medication icon is pressed
+        //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+
+        //         print('Medication Icon Pressed!');
+        //       },
+        //       child: Icon(FontAwesomeIcons.pills, size: 48, color: Colors.green),
+        //     ),
+        //   ),
+        //   Padding(
+        //     padding: EdgeInsets.all(8.0),
+        //     child: GestureDetector(
+        //       onTap: () {
+        //         // Add your logic here for when the medication icon is pressed
+        //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+
+        //         print('Medication Icon Pressed!');
+        //       },
+        //       child: Icon(FontAwesomeIcons.question, size: 48, color: Colors.orange),
+        //     ),
+            
+        //   ),
+         ],
+       ),
+ ), 
+Container(
   padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
   height: 500,
   child: ListView.builder(
@@ -111,56 +168,6 @@ Container(
       return Container(
         width: 200,
         margin: EdgeInsets.symmetric(horizontal: 8),
-        child: Card(
-          elevation: 20, // Adjust the elevation value for the shadow effect
-          color: Colors.white.withOpacity(0.16), // Replace with your desired "crystal" color
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset("assets/images/med.png",
-                  height: 200,),
-                ),
-                Text("medical",
-                style: TextStyle(fontSize: 23,
-                fontWeight: FontWeight.bold
-                ),
-                ),
-                SizedBox(height: 6,),
-                RatingBar.builder(
-                  initialRating: 4, 
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  itemCount: 5,
-                  itemSize: 16,
-                  itemPadding: EdgeInsets.symmetric(horizontal: 4),
-                  itemBuilder: (context, _) => Icon(
-                    Icons.star,
-                    color: Colors.red,
-                  ), onRatingUpdate: (index) {  },
-                  ),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: [
-                      Text(
-                        "\$10",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.red,
-                        ),
-                        
-                      )
-                    ]
-
-                  )
-                 
-              ],
-            ),)
-        ),
       );
     },
   ),
@@ -269,6 +276,33 @@ Container(
                           ]),
                         ]))));
   }
-
-
 }
+
+
+Widget buildCard() => Container(
+  width: 100,
+  height: 100,
+  color: Colors.white,
+              child:
+            
+              GestureDetector(
+              onTap: () {
+                // Add your logic here for when the pharmacy icon is pressed
+                print('Pharmacy Icon Pressed!');
+              },
+              child: Column(
+                children:[
+                  Icon(
+                    FontAwesomeIcons.medkit, 
+                    size: 48, 
+                    color: Colors.blue),
+                    const SizedBox(height: 4,),
+                    Text(
+                      "medcin"
+                    )
+                    ])
+             
+            ),
+             
+
+);

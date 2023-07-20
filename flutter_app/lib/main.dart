@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
     debugShowCheckedModeBanner: false, // Set to false to remove the debug banner
 
-      //  theme: ThemeData(
-          // drawerTheme: const DrawerThemeData(scrimColor: Colors.white)),
+       theme: ThemeData(
+      drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent)),
 
       title: 'ordering delivry pharmaceutique',
       home:  MyHomePage(title: 'Flutter Demo Home Page'),

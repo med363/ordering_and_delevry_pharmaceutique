@@ -41,6 +41,9 @@ dependencies:
   flutter_svg: ^0.22.0 
   #http: ^0.12.2 #help fetch data from API
   flutter_rating_bar: ^4.0.1
+  #flutter_icons: ^2.0.0 # Check for the latest version on pub.dev
+  font_awesome_flutter: ^10.5.0 # You can check the latest version on pub.dev
+
 
 
 dev_dependencies:
