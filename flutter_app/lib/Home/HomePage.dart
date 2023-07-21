@@ -13,33 +13,32 @@ class HomePage extends StatefulWidget {
 }
 
 class CardItem {
-  final Icon AwesomeIcons;
+  final IconData iconData;
   final String title;
   final Color iconColor;
+    final String routeName;
+
 
 
   const CardItem({
-    required this.AwesomeIcons,
+    required this.iconData,
     required this.title,
-    required this.iconColor
+    required this.iconColor,
+        required this.routeName,
+
   });
 }
 
 class _HomePageState extends State<HomePage> {
-  //final padding = EdgeInsets.symmetric(horizontal: 20);
-  // final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<CardItem> item = [
-    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.medkit), title: "Pharmacie",iconColor: Colors.blue),
-    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.pills), title: "Medication",iconColor: Colors.green),
-    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.question), title: "Question",iconColor: Colors.orange),
-    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.magento), title: "Magazins",iconColor: Colors.red),
+    CardItem(iconData: FontAwesomeIcons.medkit, title: "Pharmacie",iconColor: Colors.blue,routeName: PharmacyPage.routeName,),
+    CardItem(iconData: FontAwesomeIcons.pills, title: "Medication",iconColor: Colors.green,routeName: MedicationPage.routeName,),
+    CardItem(iconData: FontAwesomeIcons.question, title: "Question",iconColor: Colors.orange,routeName: QuestionPage.routeName,),
+    CardItem(iconData: FontAwesomeIcons.magento, title: "Magazins",iconColor: Colors.red,routeName: MagazinsPage.routeName),
   ];
-  final List<String> images = [
-    'med.png',
-    'medicament.png',
-    'pharmacie.png',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,31 +79,9 @@ class _HomePageState extends State<HomePage> {
         //inside the body
         body: Stack(children: [
           Container(
-            // decoration: BoxDecoration(
-            //   gradient: LinearGradient(
-            //     begin: Alignment.topLeft,
-            //     end: Alignment.bottomRight,
-            //     stops: const [0.1, 0.4, 0.7, 0.9],
-            //     colors: [
-            //       HexColor("#4b4293").withOpacity(0.6),
-            //       HexColor("#4b4293").withOpacity(0.6),
-            //       HexColor("#08418e"),
-            //       HexColor("#08418e")
-            //     ],
-            //   ),
-            //   image: DecorationImage(
-            //     fit: BoxFit.cover,
-            //     colorFilter: ColorFilter.mode(
-            //         HexColor("#fff").withOpacity(0.3), BlendMode.dstATop),
-            //     image: AssetImage('assets/images/1.jpg'),
-            //   ),
-            // ),
+
 
             color: Colors.transparent,
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //       imacloge: AssetImage("../../icons/background.jpg"),
-            //       fit: BoxFit.cover ))
           ),
           Container(
             padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
@@ -122,7 +99,6 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             padding: const EdgeInsets.only(top: 160, left: 1, right: 10),
-
             height: 250, // Set the desired height of the scrolling area
             child: ListView.separated(
                 padding: EdgeInsets.all(16),
@@ -133,47 +109,6 @@ class _HomePageState extends State<HomePage> {
                       width: 12,
                     ),
                 itemBuilder: (context, index) => buildCard(context,item: item[index])
-
-                //   Padding(
-                //     padding: EdgeInsets.all(8.0),
-                //     child:
-
-                //       GestureDetector(
-                //       onTap: () {
-                //         // Add your logic here for when the pharmacy icon is pressed
-                //         print('Pharmacy Icon Pressed!');
-                //       },
-                //       child: Icon(FontAwesomeIcons.medkit, size: 48, color: Colors.blue),
-
-                //     ),
-
-                //   ),
-
-                //   Padding(
-                //     padding: EdgeInsets.all(8.0),
-                //     child: GestureDetector(
-                //       onTap: () {
-                //         // Add your logic here for when the medication icon is pressed
-                //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
-
-                //         print('Medication Icon Pressed!');
-                //       },
-                //       child: Icon(FontAwesomeIcons.pills, size: 48, color: Colors.green),
-                //     ),
-                //   ),
-                //   Padding(
-                //     padding: EdgeInsets.all(8.0),
-                //     child: GestureDetector(
-                //       onTap: () {
-                //         // Add your logic here for when the medication icon is pressed
-                //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
-
-                //         print('Medication Icon Pressed!');
-                //       },
-                //       child: Icon(FontAwesomeIcons.question, size: 48, color: Colors.orange),
-                //     ),
-
-                //   ),
                 ),
           ),
           Container(
@@ -181,7 +116,7 @@ class _HomePageState extends State<HomePage> {
             height: 500,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: images.length,
+              itemCount: 2,
               itemBuilder: (context, index) {
                 return Container(
                   width: 200,
@@ -297,77 +232,52 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget buildCard(BuildContext context,{required CardItem item}) => Container(
-      width: 100,
-      color: Colors.white,
-      child: GestureDetector(
-          child: Column(children: [
-        Expanded(
-          child: AspectRatio(
-              aspectRatio: 4 / 3,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: InkWell(
-        onTap: () {
-          // Navigate to the corresponding page based on the tapped icon
-          switch (item.AwesomeIcons) {
-            case FontAwesomeIcons.medkit:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PharmacyPage(), // Replace with your desired page
-                ),
-              );
-              break;
-            case FontAwesomeIcons.pills:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MedicationPage(), // Replace with your desired page
-                ),
-              );
-              break;
-            case FontAwesomeIcons.question:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QuestionPage(), // Replace with your desired page
-                ),
-              );
-              break;
-            case FontAwesomeIcons.magento:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MagazinsPage(), // Replace with your desired page
-                ),
-              );
-              break;
-            default:
-              // Do nothing if no matching icon is found
-              break;
-          }
-        },
-                    child: Ink(child: 
-                     item.AwesomeIcons
+width: 100,
+        color: Colors.white,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, item.routeName);
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 4 / 3,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Container(
+                      color: item.iconColor,
+                      child: Center(
+                        child: Icon(
+                          item.iconData,
+                          size: 40,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                  ))),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                item.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
         ),
-                const SizedBox(
-          height: 10,
-        ),
-        Text(item.title)
-
-      ],
-      
-      ),
-      
-      ),
-      
-    );
+      );
 
 
 // Replace these with your desired destination pages
 class PharmacyPage extends StatelessWidget {
+    static const String routeName = '/pharmacy';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -382,6 +292,8 @@ class PharmacyPage extends StatelessWidget {
 }
 
 class MedicationPage extends StatelessWidget {
+    static const String routeName = '/medication';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -396,6 +308,8 @@ class MedicationPage extends StatelessWidget {
 }
 
 class QuestionPage extends StatelessWidget {
+    static const String routeName = '/question';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -410,6 +324,8 @@ class QuestionPage extends StatelessWidget {
 }
 
 class MagazinsPage extends StatelessWidget {
+    static const String routeName = '/magazin';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -422,4 +338,3 @@ class MagazinsPage extends StatelessWidget {
     );
   }
 }
-
