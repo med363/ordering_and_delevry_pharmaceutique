@@ -1,9 +1,9 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,11 +12,29 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+class CardItem {
+  final Icon AwesomeIcons;
+  final String title;
+  final Color iconColor;
+
+
+  const CardItem({
+    required this.AwesomeIcons,
+    required this.title,
+    required this.iconColor
+  });
+}
+
 class _HomePageState extends State<HomePage> {
   //final padding = EdgeInsets.symmetric(horizontal: 20);
   // final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  List<CardItem> item = [
+    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.medkit), title: "Pharmacie",iconColor: Colors.blue),
+    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.pills), title: "Medication",iconColor: Colors.green),
+    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.question), title: "Question",iconColor: Colors.orange),
+    CardItem(AwesomeIcons: Icon(FontAwesomeIcons.magento), title: "Magazins",iconColor: Colors.red),
+  ];
   final List<String> images = [
     'med.png',
     'medicament.png',
@@ -53,7 +71,7 @@ class _HomePageState extends State<HomePage> {
               child: IconButton(
                 icon: Icon(Icons.login),
                 onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/login');
                 },
               ),
             ),
@@ -102,76 +120,76 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-Container(
-              padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
+          Container(
+            padding: const EdgeInsets.only(top: 160, left: 1, right: 10),
 
-      height: 250, // Set the desired height of the scrolling area
-      child: ListView(
-        scrollDirection: Axis.horizontal, // Set the scroll direction to horizontal
-        children: [
-          buildCard(),
-          SizedBox(width: 12,),
-          buildCard(),
-          SizedBox(width: 12,),
-          buildCard()
-        //   Padding(
-        //     padding: EdgeInsets.all(8.0),
-        //     child:
-            
-        //       GestureDetector(
-        //       onTap: () {
-        //         // Add your logic here for when the pharmacy icon is pressed
-        //         print('Pharmacy Icon Pressed!');
-        //       },
-        //       child: Icon(FontAwesomeIcons.medkit, size: 48, color: Colors.blue),
-             
-        //     ),
-             
-             
-        //   ),
+            height: 250, // Set the desired height of the scrolling area
+            child: ListView.separated(
+                padding: EdgeInsets.all(16),
+                scrollDirection:
+                    Axis.horizontal, // Set the scroll direction to horizontal
+                itemCount:item.length,
+                separatorBuilder: (context, index) => SizedBox(
+                      width: 12,
+                    ),
+                itemBuilder: (context, index) => buildCard(context,item: item[index])
 
-        //   Padding(
-        //     padding: EdgeInsets.all(8.0),
-        //     child: GestureDetector(
-        //       onTap: () {
-        //         // Add your logic here for when the medication icon is pressed
-        //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+                //   Padding(
+                //     padding: EdgeInsets.all(8.0),
+                //     child:
 
-        //         print('Medication Icon Pressed!');
-        //       },
-        //       child: Icon(FontAwesomeIcons.pills, size: 48, color: Colors.green),
-        //     ),
-        //   ),
-        //   Padding(
-        //     padding: EdgeInsets.all(8.0),
-        //     child: GestureDetector(
-        //       onTap: () {
-        //         // Add your logic here for when the medication icon is pressed
-        //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+                //       GestureDetector(
+                //       onTap: () {
+                //         // Add your logic here for when the pharmacy icon is pressed
+                //         print('Pharmacy Icon Pressed!');
+                //       },
+                //       child: Icon(FontAwesomeIcons.medkit, size: 48, color: Colors.blue),
 
-        //         print('Medication Icon Pressed!');
-        //       },
-        //       child: Icon(FontAwesomeIcons.question, size: 48, color: Colors.orange),
-        //     ),
-            
-        //   ),
-         ],
-       ),
- ), 
-Container(
-  padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
-  height: 500,
-  child: ListView.builder(
-    scrollDirection: Axis.horizontal,
-    itemCount: images.length,
-    itemBuilder: (context, index) {
-      return Container(
-        width: 200,
-        margin: EdgeInsets.symmetric(horizontal: 8),
-      );
-    },
-  ),
-),
+                //     ),
+
+                //   ),
+
+                //   Padding(
+                //     padding: EdgeInsets.all(8.0),
+                //     child: GestureDetector(
+                //       onTap: () {
+                //         // Add your logic here for when the medication icon is pressed
+                //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+
+                //         print('Medication Icon Pressed!');
+                //       },
+                //       child: Icon(FontAwesomeIcons.pills, size: 48, color: Colors.green),
+                //     ),
+                //   ),
+                //   Padding(
+                //     padding: EdgeInsets.all(8.0),
+                //     child: GestureDetector(
+                //       onTap: () {
+                //         // Add your logic here for when the medication icon is pressed
+                //        //Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+
+                //         print('Medication Icon Pressed!');
+                //       },
+                //       child: Icon(FontAwesomeIcons.question, size: 48, color: Colors.orange),
+                //     ),
+
+                //   ),
+                ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
+            height: 500,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 200,
+                  margin: EdgeInsets.symmetric(horizontal: 8),
+                );
+              },
+            ),
+          ),
           Container(
             padding: const EdgeInsets.only(top: 510, left: 10, right: 10),
             child: Column(
@@ -187,122 +205,221 @@ Container(
               ],
             ),
           ),
-Container(
-  padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
-  child: ListView.builder(
-    // scrollDirection: Axis.horizontal,
+          Container(
+            padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
+            child: ListView.builder(
+              // scrollDirection: Axis.horizontal,
 
-    itemBuilder: (context, index) {
-      return Card(
-        elevation: 20,
-        color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.6), // Replace with your desired "crystal" color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/images/med.png', // Replace with the image path
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 120,
-                ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                "name", // Replace with the product name
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text("price", // Replace with the product price
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  ),
-)
-
-
+              itemBuilder: (context, index) {
+                return Card(
+                  elevation: 20,
+                  color: Color.fromARGB(255, 255, 255, 255).withOpacity(
+                      0.6), // Replace with your desired "crystal" color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            'assets/images/med.png', // Replace with the image path
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: 120,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          "name", // Replace with the product name
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "price", // Replace with the product price
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          )
         ]),
         drawer: Drawer(
             width: 275,
             elevation: 30,
             backgroundColor: Colors.white,
-                child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop(); // Close the drawer
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.black,
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 0,
-                                  ),
-                                  Text(
-                                    'Back ',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop(); // Close the drawer
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const [
+                              Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.black,
+                                size: 20,
                               ),
-                            )
-                          ]),
-                        ]))));
+                              SizedBox(
+                                width: 0,
+                              ),
+                              Text(
+                                'Back ',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        )
+                      ]),
+                    ]))));
   }
 }
 
+Widget buildCard(BuildContext context,{required CardItem item}) => Container(
+      width: 100,
+      color: Colors.white,
+      child: GestureDetector(
+          child: Column(children: [
+        Expanded(
+          child: AspectRatio(
+              aspectRatio: 4 / 3,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: InkWell(
+        onTap: () {
+          // Navigate to the corresponding page based on the tapped icon
+          switch (item.AwesomeIcons) {
+            case FontAwesomeIcons.medkit:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PharmacyPage(), // Replace with your desired page
+                ),
+              );
+              break;
+            case FontAwesomeIcons.pills:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MedicationPage(), // Replace with your desired page
+                ),
+              );
+              break;
+            case FontAwesomeIcons.question:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QuestionPage(), // Replace with your desired page
+                ),
+              );
+              break;
+            case FontAwesomeIcons.magento:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MagazinsPage(), // Replace with your desired page
+                ),
+              );
+              break;
+            default:
+              // Do nothing if no matching icon is found
+              break;
+          }
+        },
+                    child: Ink(child: 
+                     item.AwesomeIcons
+                    ),
+                  ))),
+        ),
+                const SizedBox(
+          height: 10,
+        ),
+        Text(item.title)
 
-Widget buildCard() => Container(
-  width: 100,
-  height: 100,
-  color: Colors.white,
-              child:
-            
-              GestureDetector(
-              onTap: () {
-                // Add your logic here for when the pharmacy icon is pressed
-                print('Pharmacy Icon Pressed!');
-              },
-              child: Column(
-                children:[
-                  Icon(
-                    FontAwesomeIcons.medkit, 
-                    size: 48, 
-                    color: Colors.blue),
-                    const SizedBox(height: 4,),
-                    Text(
-                      "medcin"
-                    )
-                    ])
-             
-            ),
-             
+      ],
+      
+      ),
+      
+      ),
+      
+    );
 
-);
+
+// Replace these with your desired destination pages
+class PharmacyPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Pharmacy Page"),
+      ),
+      body: Center(
+        child: Text("This is the Pharmacy Page."),
+      ),
+    );
+  }
+}
+
+class MedicationPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Medication Page"),
+      ),
+      body: Center(
+        child: Text("This is the Medication Page."),
+      ),
+    );
+  }
+}
+
+class QuestionPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Question Page"),
+      ),
+      body: Center(
+        child: Text("This is the Question Page."),
+      ),
+    );
+  }
+}
+
+class MagazinsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Magazins Page"),
+      ),
+      body: Center(
+        child: Text("This is the Magazins Page."),
+      ),
+    );
+  }
+}
+
