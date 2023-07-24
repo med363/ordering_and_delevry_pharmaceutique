@@ -370,46 +370,89 @@ Container(
         ]
         ),),
         drawer: Drawer(
-            width: 275,
-            elevation: 30,
-            backgroundColor: Colors.white,
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop(); // Close the drawer
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
-                              Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: 0,
-                              ),
-                              Text(
-                                'Back ',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        )
-                      ]),
-                    ]
-                    )
-                    )
-                    )
-                    );
+          width: 275,
+             elevation: 30,
+            backgroundColor: Color(0xF3393838),
+            shape: const RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.horizontal(right: Radius.circular(30))),
+            child: Container(
+                decoration: const BoxDecoration(
+                    borderRadius:
+                        BorderRadius.horizontal(right: Radius.circular(40)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.white, spreadRadius: 10, blurRadius: 10)
+                    ]),
+         
+        child: SafeArea(
+          child: Column(
+            children: [
+              ListTile(
+                dense: true,
+                title: Text("Home Page"),
+                leading: Icon(Icons.home),
+                onTap: () {
+                  // Action when "Home Page" menu is pressed
+                  // Add your desired action here
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                dense: true,
+                title: Text("My Profile"),
+                leading: Icon(Icons.person),
+                onTap: () {
+                  // Action when "My Profile" menu is pressed
+                  // Add your desired action here
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                dense: true,
+                title: Text("My Orders"),
+                leading: Icon(Icons.add_box),
+                onTap: () {
+                  // Acti.on when "My Orders" menu is pressed
+                  // Add your desired action here
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                dense: true,
+                title: Text("My Favourites"),
+                leading: Icon(Icons.monitor_heart),
+                onTap: () {
+                  // Action when "My Favourites" menu is pressed
+                  // Add your desired action here
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                dense: true,
+                title: Text("My Chat"),
+                leading: Icon(Icons.chat_bubble), // Icon for My Chat
+                onTap: () {
+                  // Action when "My Chat" menu is pressed
+                  // Add your desired action here
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                dense: true,
+                title: Text("Question"),
+                leading: Icon(Icons.help), // Icon for Question
+                onTap: () {
+                  // Action when "Question" menu is pressed
+                  // Add your desired action here
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+            ],
+          ),
+        ),
+      ),)
+      );
   }
 }
 
