@@ -19,7 +19,14 @@ class MyApp extends StatelessWidget {
 
       title: 'ordering delivry pharmaceutique',
       home:  MyHomePage(title: 'Flutter Demo Home Page'),
+
+      routes: {
+        '/login': (context) => LoginScreen(),
+  
+      },
     );
+    
+    
   }
 }
 
@@ -43,75 +50,11 @@ return MaterialApp(
         debugShowCheckedModeBanner: false, // Set to false to remove the debug banner
 
       home: HomePage(),
+
       routes: {
         '/login': (context) => LoginScreen(),
+
       },
-    );
-  }
-}
-
-class PharmacyPage extends StatelessWidget {
-  static const String routeName = '/pharmacy';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Pharmacy Page"),
-      ),
-      body: Center(
-        child: Text("This is the Pharmacy Page."),
-      ),
-    );
-  }
-}
-
-class MedicationPage extends StatelessWidget {
-  static const String routeName = '/medication';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Medication Page"),
-      ),
-      body: Center(
-        child: Text("This is the medication Page."),
-      ),
-    );
-  }
-}
-
-
-class QuestionPage extends StatelessWidget {
-  static const String routeName = '/question';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("question Page"),
-      ),
-      body: Center(
-        child: Text("This is the question Page."),
-      ),
-    );
-  }
-}
-
-
-class MagazinsPage extends StatelessWidget {
-  static const String routeName = '/magazin';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("magazins Page"),
-      ),
-      body: Center(
-        child: Text("This is the Pharmacy Page."),
-      ),
     );
   }
 }

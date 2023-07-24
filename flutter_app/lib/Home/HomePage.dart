@@ -1,9 +1,16 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Home/Pharmacy_Page.dart';
+import 'package:flutter_app/Home/Medication_Page.dart';
+import 'package:flutter_app/Home/Magazin_Page.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'Carossel/caroussel.dart';
+import 'Question_Page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,42 +19,22 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class CardItem {
-  final IconData iconData;
-  final String title;
-  final Color iconColor;
-    final String routeName;
 
-
-
-  const CardItem({
-    required this.iconData,
-    required this.title,
-    required this.iconColor,
-        required this.routeName,
-
-  });
-}
 
 class _HomePageState extends State<HomePage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<CardItem> item = [
-    CardItem(iconData: FontAwesomeIcons.medkit, title: "Pharmacie",iconColor: Colors.blue,routeName: PharmacyPage.routeName,),
-    CardItem(iconData: FontAwesomeIcons.pills, title: "Medication",iconColor: Colors.green,routeName: MedicationPage.routeName,),
-    CardItem(iconData: FontAwesomeIcons.question, title: "Question",iconColor: Colors.orange,routeName: QuestionPage.routeName,),
-    CardItem(iconData: FontAwesomeIcons.magento, title: "Magazins",iconColor: Colors.red,routeName: MagazinsPage.routeName),
-  ];
+
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        extendBodyBehindAppBar: true, // Important: extend body behind AppBar
+        extendBodyBehindAppBar: false, // Important: extend body behind AppBar
 
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.blue,
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),
           // Set the color of the drawer icon
@@ -68,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: IconButton(
-                icon: Icon(Icons.login),
+                icon: Icon(Icons.person),
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
@@ -77,120 +64,311 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         //inside the body
-        body: Stack(children: [
+        body: SingleChildScrollView(
+          child: Column(
+          children: [
           Container(
 
 
             color: Colors.transparent,
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
-            child: Column(
-              children: [
-                Text(
-                  "What you search?",
-                  style: GoogleFonts.oswald(
-                      color: Colors.black,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+Container(
+  padding: const EdgeInsets.only(top: 20, left: 20, right: 0),
+  child: Align(
+    alignment: Alignment.centerLeft,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "What you search?",
+          style: GoogleFonts.oswald(
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 160, left: 1, right: 10),
-            height: 250, // Set the desired height of the scrolling area
-            child: ListView.separated(
-                padding: EdgeInsets.all(16),
-                scrollDirection:
-                    Axis.horizontal, // Set the scroll direction to horizontal
-                itemCount:item.length,
-                separatorBuilder: (context, index) => SizedBox(
-                      width: 12,
-                    ),
-                itemBuilder: (context, index) => buildCard(context,item: item[index])
-                ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 160, left: 10, right: 10),
-            height: 500,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 2,
-              itemBuilder: (context, index) {
-                return Container(
-                  width: 200,
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                );
-              },
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 510, left: 10, right: 10),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Categories",
-                  style: GoogleFonts.oswald(
-                      color: Colors.black,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
-            child: ListView.builder(
-              // scrollDirection: Axis.horizontal,
+        ),
+      ],
+    ),
+  ),
+),
 
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 20,
-                  color: Color.fromARGB(255, 255, 255, 255).withOpacity(
-                      0.6), // Replace with your desired "crystal" color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'assets/images/med.png', // Replace with the image path
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: 120,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          "name", // Replace with the product name
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "price", // Replace with the product price
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+          Container(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            height: 200, // Set the desired height of the scrolling area
+            child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        Card(
+          shadowColor: Colors.black,
+          elevation: 9,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          color: Colors.white,
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            width: 150,
+            height: 250,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                child: Image.asset("assets/images/pharmacie.png",
+                width: 400,
+                height: 120,),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> PharmacyPage()));
+                },
+                ),
+                SizedBox(height: 10,),
+                                          Text(
+            "Pharmacy",
+                        textAlign: TextAlign.center, // Center text horizontally
+
+            style: GoogleFonts.oswald(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
-          )
-        ]),
+          ),
+                
+  
+              ],
+            ),
+          ),
+        ),
+                SizedBox(width: 10), 
+
+                
+
+        Card(
+          shadowColor: Colors.black,
+          elevation: 9,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          color: Colors.white,
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            width: 150,
+            height: 250,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                GestureDetector(
+                child: Image.asset("assets/images/medicament.png",
+                width: 400,
+                height: 120,),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> MedicationPage()));
+                },
+                ),
+                SizedBox(height: 8,),
+                                          Text(
+            "Medication",
+                        textAlign: TextAlign.center, // Center text horizontally
+
+            style: GoogleFonts.oswald(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+                           ],
+            ),
+          ),
+        ),
+                SizedBox(width: 10), // Add space between cards
+
+        Card(
+          shadowColor: Colors.black,
+          elevation: 9,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          color: Colors.white,
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            width: 150,
+            height: 200,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+  GestureDetector(
+                child: Image.asset("assets/images/question.jpg",
+                width: 400,
+                height: 120,),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> QuestionPage()));
+                },
+                ),
+                SizedBox(height: 10,),
+                                          Text(
+            "Question",
+                        textAlign: TextAlign.center, // Center text horizontally
+
+            style: GoogleFonts.oswald(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+              ],
+            ),
+          ),
+        ),
+                SizedBox(width: 10), // Add space between cards
+
+        Card(
+          shadowColor: Colors.black,
+          elevation: 9,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          color: Colors.white,
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            width: 150,
+            height: 200,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+  GestureDetector(
+                child: Image.asset("assets/images/med.png",
+                  width: 400,
+                height: 120,),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> MagazinPage()));
+                },
+                ),
+                SizedBox(height: 10,),
+                                          Text(
+            "Magazin",
+                        textAlign: TextAlign.center, // Center text horizontally
+
+            style: GoogleFonts.oswald(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),              ],
+            ),
+          ),
+        ),
+      ],
+    )
+
+          ),
+              Container(
+  padding: const EdgeInsets.only(top: 20, left: 20, right: 10),
+  child: Align(
+    alignment: Alignment.centerLeft,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Magazin",
+          style: GoogleFonts.oswald(
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
+
+         Container(
+  padding: const EdgeInsets.only(top: 20, left: 0, right: 10),
+
+  child: Column(
+    children: [
+      DestinationCarousel(),
+      
+    ],
+  ),
+),
+Container(
+  padding: const EdgeInsets.only(top: 20, left: 0, right: 10),
+
+  child: Column(
+    children: [
+      DestinationCarousel(),
+      
+    ],
+  ),
+),
+
+         
+          // Container(
+          //   padding: const EdgeInsets.only(top: 510, left: 20, right: 10),
+          //   child: Column(
+          //     // mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Text(
+          //         "Categories",
+          //         style: GoogleFonts.oswald(
+          //             color: Colors.black,
+          //             fontSize: 32,
+          //             fontWeight: FontWeight.bold),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Container(
+          //   padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
+          //   child: ListView.builder(
+          //     // scrollDirection: Axis.horizontal,
+
+          //     itemBuilder: (context, index) {
+          //       return Card(
+          //         elevation: 20,
+          //         color: Color.fromARGB(255, 255, 255, 255).withOpacity(
+          //             0.6), // Replace with your desired "crystal" color
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(8),
+          //         ),
+          //         child: Padding(
+          //           padding: const EdgeInsets.all(8.0),
+          //           child: Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               ClipRRect(
+          //                 borderRadius: BorderRadius.circular(8),
+          //                 child: Image.asset(
+          //                   'assets/images/med.png', // Replace with the image path
+          //                   fit: BoxFit.cover,
+          //                   width: double.infinity,
+          //                   height: 120,
+          //                 ),
+          //               ),
+          //               SizedBox(height: 8),
+          //               Text(
+          //                 "name", // Replace with the product name
+          //                 style: TextStyle(
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.bold,
+          //                 ),
+          //               ),
+          //               SizedBox(height: 4),
+          //               Text(
+          //                 "price", // Replace with the product price
+          //                 style: TextStyle(
+          //                   fontSize: 14,
+          //                   color: Colors.grey,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // )
+        ]
+        ),),
         drawer: Drawer(
             width: 275,
             elevation: 30,
@@ -227,114 +405,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         )
                       ]),
-                    ]))));
+                    ]
+                    )
+                    )
+                    )
+                    );
   }
 }
 
-Widget buildCard(BuildContext context,{required CardItem item}) => Container(
-width: 100,
-        color: Colors.white,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, item.routeName);
-          },
-          child: Column(
-            children: [
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 4 / 3,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Container(
-                      color: item.iconColor,
-                      child: Center(
-                        child: Icon(
-                          item.iconData,
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                item.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
 
-
-// Replace these with your desired destination pages
-class PharmacyPage extends StatelessWidget {
-    static const String routeName = '/pharmacy';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Pharmacy Page"),
-      ),
-      body: Center(
-        child: Text("This is the Pharmacy Page."),
-      ),
-    );
-  }
-}
-
-class MedicationPage extends StatelessWidget {
-    static const String routeName = '/medication';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Medication Page"),
-      ),
-      body: Center(
-        child: Text("This is the Medication Page."),
-      ),
-    );
-  }
-}
-
-class QuestionPage extends StatelessWidget {
-    static const String routeName = '/question';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Question Page"),
-      ),
-      body: Center(
-        child: Text("This is the Question Page."),
-      ),
-    );
-  }
-}
-
-class MagazinsPage extends StatelessWidget {
-    static const String routeName = '/magazin';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Magazins Page"),
-      ),
-      body: Center(
-        child: Text("This is the Magazins Page."),
-      ),
-    );
-  }
-}

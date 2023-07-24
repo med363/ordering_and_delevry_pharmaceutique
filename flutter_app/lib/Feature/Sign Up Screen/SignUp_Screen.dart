@@ -44,25 +44,25 @@ class _SignupScreenState extends State<SignupScreen> {
       home:
     Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: const [0.1, 0.4, 0.7, 0.9],
-            colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
-            ],
-          ),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-            image: AssetImage('assets/images/1.jpg'),
-          ),
-        ),
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //     stops: const [0.1, 0.4, 0.7, 0.9],
+        //     colors: [
+        //       HexColor("#4b4293").withOpacity(0.8),
+        //       HexColor("#4b4293"),
+        //       HexColor("#08418e"),
+        //       HexColor("#08418e")
+        //     ],
+        //   ),
+        //   image: DecorationImage(
+        //     fit: BoxFit.cover,
+        //     colorFilter: ColorFilter.mode(
+        //         HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
+        //     image: AssetImage('assets/images/1.jpg'),
+        //   ),
+        // ),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -98,7 +98,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Text(
                               "Create your account",
                               style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.black,
                                   letterSpacing: 0.5),
                             ),
                           ),
@@ -502,7 +502,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       const Text("If you have an account ",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 60, 51, 51),
                             letterSpacing: 0.5,
                           )),
                       GestureDetector(
@@ -515,7 +515,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         child: Text("Sing in",
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
                                 fontSize: 14)),

@@ -43,7 +43,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   #flutter_icons: ^2.0.0 # Check for the latest version on pub.dev
   font_awesome_flutter: ^10.5.0 # You can check the latest version on pub.dev
-
+  carousel_slider: ^4.2.1
+  smooth_page_indicator: ^1.1.0
 
 
 dev_dependencies:
@@ -77,8 +78,8 @@ flutter:
     - assets/images/med.png
     - assets/images/medicament.png
     - assets/images/pharmacie.png
+    - assets/images/question.jpg
     - assets/images/menu.svg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

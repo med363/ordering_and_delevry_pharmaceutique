@@ -34,25 +34,26 @@ class _LoginScreenState extends State<LoginScreen> {
     Scaffold(
       
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: const [0.1, 0.4, 0.7, 0.9],
-            colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
-            ],
-          ),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-            image: AssetImage('assets/images/1.jpg'),
-          ),
-        ),
+        
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //     stops: const [0.1, 0.4, 0.7, 0.9],
+        //     colors: [
+        //       HexColor("#4b4293").withOpacity(0.8),
+        //       HexColor("#4b4293"),
+        //       HexColor("#08418e"),
+        //       HexColor("#08418e")
+        //     ],
+        //   ),
+        //   image: DecorationImage(
+        //     fit: BoxFit.cover,
+        //     colorFilter: ColorFilter.mode(
+        //         HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
+        //     image: AssetImage('assets/images/1.jpg'),
+        //   ),
+        // ),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -86,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             "Please sign in to continue",
                             style: TextStyle(
-                                color: Colors.white, letterSpacing: 0.5),
+                                color: Colors.black, letterSpacing: 0.5),
                           ),
                         ),
                         const SizedBox(
@@ -221,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Text(
                                 "Login",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   letterSpacing: 0.5,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
@@ -257,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }),
                     child: Text("Can't Log In?",
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.black.withOpacity(0.9),
                           letterSpacing: 0.5,
                         )),
                   ),
@@ -271,7 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Text("Don't have an account? ",
                           style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Colors.black,
                             letterSpacing: 0.5,
                           )),
                       GestureDetector(
@@ -284,7 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text("Sign up",
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
                                 fontSize: 14)),
