@@ -25,7 +25,7 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
               child: Image.asset(e,
                 fit: BoxFit.cover,
                 width: 1000,
-                height: 10000,
+              
               ),
               borderRadius: BorderRadius.circular(20.0),
             ))
@@ -67,7 +67,7 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
               alignment: FractionalOffset.bottomLeft,
 
           child: Container(
-                margin: EdgeInsets.only(left: 4, bottom: 24.0),
+                margin: EdgeInsets.only(left: 50, bottom: 24.0),
 
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
