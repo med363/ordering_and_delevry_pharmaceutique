@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_app/Home/HomePage.dart';
+
 
 class PharmacyPage extends StatefulWidget {
   const PharmacyPage({super.key});
@@ -9,67 +10,67 @@ class PharmacyPage extends StatefulWidget {
 }
 
 class _PharmacyPageState extends State<PharmacyPage> {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
-          // Set the color of the drawer icon
+        appBar: AppBar(
           leading: IconButton(
-            icon: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: SvgPicture.asset(
-                'assets/images/menu.svg', // Replace with the path to your SVG file
-                width: 24,
-                height: 24,
+              icon: Row(
+                
+                children: [
+                  Icon(Icons.arrow_back),
+                  Image.asset(
+                    "assets/images/pharmacie.png",
+                    width: 40, // Set your desired width
+                    height: 40, // Set your desired height
+                  ),
+                  SizedBox(
+                      width: 8), // Add some spacing between the image and text
+                  Text(
+                    'Pharmacie',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
               ),
-            ),
-            onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
-            },
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: IconButton(
-                icon: Icon(Icons.person),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
               ),
-            ),
-          ],
         ),
-      body: Container(
-            padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
-            child: TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.camera_alt),
-                      onPressed: () {
-                        // Action lors du clic sur l'icône de l'appareil photo/vidéo
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.mic),
-                      onPressed: () {
-                        // Action lors du clic sur l'icône de la voix
-                      },
-                    ),
-                  ],
-                ),
-                hintText: 'Rechercher des médicaments...',
+        body: Container(
+          padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+          child: TextField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                // children: [
+                //   IconButton(
+                //     icon: Icon(Icons.camera_alt),
+                //     onPressed: () {
+                //       // Action lors du clic sur l'icône de l'appareil photo/vidéo
+                //     },
+                //   ),
+                //   IconButton(
+                //     icon: Icon(Icons.mic),
+                //     onPressed: () {
+                //       // Action lors du clic sur l'icône de la voix
+                //     },
+                //   ),
+                // ],
               ),
+              hintText: 'Rechercher des médicaments...',
             ),
-
-    ));
+          ),
+        )
+        );
   }
 }

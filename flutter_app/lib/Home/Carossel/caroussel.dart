@@ -13,7 +13,7 @@ class DestinationCarousel extends StatefulWidget {
 class _DestinationCarouselState extends State<DestinationCarousel> {
   int _current = 0;
   final List<String> images = [
-    'assets/images/med.png',
+    'assets/images/qr-code.jpg',
     'assets/images/pharmacie.png',
   ];
 
@@ -22,11 +22,12 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
   List<Widget> generateImagesTitle() {
     return images
         .map((e) => ClipRRect(
-              child: Image.asset(
-                e,
+              child: Image.asset(e,
                 fit: BoxFit.cover,
+                width: 1000,
+                height: 10000,
               ),
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(20.0),
             ))
         .toList();
   }
@@ -62,17 +63,30 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
                 enlargeStrategy: CenterPageEnlargeStrategy.height)),
         AspectRatio(
           aspectRatio: 18 / 8,
-          child: Center(
+          child:Align(
+              alignment: FractionalOffset.bottomLeft,
+
+          child: Container(
+                margin: EdgeInsets.only(left: 4, bottom: 24.0),
+
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.yellow,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
             child: Text(
               comments[_current],
-              textAlign: TextAlign.center, // Center text horizontally
-              style: GoogleFonts.oswald(
-                decoration: TextDecoration.none,
-                fontSize: MediaQuery.of(context).size.width / 15,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ),
+          )
+          )
+                       
+
+          
         ),
          Positioned(
           

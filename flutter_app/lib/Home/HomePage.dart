@@ -8,7 +8,7 @@ import 'package:flutter_app/Home/Magazin_Page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:shimmer/shimmer.dart';
 import 'Carossel/caroussel.dart';
 import 'Question_Page.dart';
 
@@ -259,7 +259,20 @@ Container(
     )
 
           ),
-              Container(
+             
+
+
+         Container(
+  padding: const EdgeInsets.only(top: 20, left: 0, right: 10),
+
+  child: Column(
+    children: [
+      DestinationCarousel(),
+      
+    ],
+  ),
+),
+ Container(
   padding: const EdgeInsets.only(top: 20, left: 20, right: 10),
   child: Align(
     alignment: Alignment.centerLeft,
@@ -278,18 +291,6 @@ Container(
     ),
   ),
 ),
-
-
-         Container(
-  padding: const EdgeInsets.only(top: 20, left: 0, right: 10),
-
-  child: Column(
-    children: [
-      DestinationCarousel(),
-      
-    ],
-  ),
-),
 Container(
   padding: const EdgeInsets.only(top: 20, left: 0, right: 10),
 
@@ -300,73 +301,27 @@ Container(
     ],
   ),
 ),
+Container(
+  padding: EdgeInsets.only(top: 30 ,left: 20,right: 20),
+  child: SizedBox(
+  width: 200.0,
+  height: 100.0,
+  child: Shimmer.fromColors(
+    baseColor: Colors.red,
+    highlightColor: Colors.yellow,
+    child: Text(
+      'Shimmer',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 40.0,
+        fontWeight:
+        FontWeight.bold,
+      ),
+    ),
+  ),
+)
+)
 
-         
-          // Container(
-          //   padding: const EdgeInsets.only(top: 510, left: 20, right: 10),
-          //   child: Column(
-          //     // mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Text(
-          //         "Categories",
-          //         style: GoogleFonts.oswald(
-          //             color: Colors.black,
-          //             fontSize: 32,
-          //             fontWeight: FontWeight.bold),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // Container(
-          //   padding: const EdgeInsets.only(top: 470, left: 10, right: 10),
-          //   child: ListView.builder(
-          //     // scrollDirection: Axis.horizontal,
-
-          //     itemBuilder: (context, index) {
-          //       return Card(
-          //         elevation: 20,
-          //         color: Color.fromARGB(255, 255, 255, 255).withOpacity(
-          //             0.6), // Replace with your desired "crystal" color
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(8),
-          //         ),
-          //         child: Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               ClipRRect(
-          //                 borderRadius: BorderRadius.circular(8),
-          //                 child: Image.asset(
-          //                   'assets/images/med.png', // Replace with the image path
-          //                   fit: BoxFit.cover,
-          //                   width: double.infinity,
-          //                   height: 120,
-          //                 ),
-          //               ),
-          //               SizedBox(height: 8),
-          //               Text(
-          //                 "name", // Replace with the product name
-          //                 style: TextStyle(
-          //                   fontSize: 16,
-          //                   fontWeight: FontWeight.bold,
-          //                 ),
-          //               ),
-          //               SizedBox(height: 4),
-          //               Text(
-          //                 "price", // Replace with the product price
-          //                 style: TextStyle(
-          //                   fontSize: 14,
-          //                   color: Colors.grey,
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // )
         ]
         ),),
         drawer: Drawer(
@@ -400,8 +355,8 @@ Container(
               ),
               ListTile(
                 dense: true,
-                title: Text("My Profile"),
-                leading: Icon(Icons.person),
+                title: Text("Pharmacy"),
+                leading: Icon(Icons.local_pharmacy),
                 onTap: () {
                   // Action when "My Profile" menu is pressed
                   // Add your desired action here
@@ -410,8 +365,9 @@ Container(
               ),
               ListTile(
                 dense: true,
-                title: Text("My Orders"),
-                leading: Icon(Icons.add_box),
+                title: Text("Medication"),
+                          leading: Icon(Icons.medication),
+
                 onTap: () {
                   // Acti.on when "My Orders" menu is pressed
                   // Add your desired action here
@@ -420,38 +376,31 @@ Container(
               ),
               ListTile(
                 dense: true,
-                title: Text("My Favourites"),
-                leading: Icon(Icons.monitor_heart),
-                onTap: () {
-                  // Action when "My Favourites" menu is pressed
-                  // Add your desired action here
-                  Navigator.pop(context); // Close the drawer
+                title: Text("Question"),
+                leading: Icon(Icons.help), // Icon for Question
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> MagazinPage()));
                 },
               ),
               ListTile(
                 dense: true,
-                title: Text("My Chat"),
-                leading: Icon(Icons.chat_bubble), // Icon for My Chat
+                title: Text("Magazin"),
+                leading: Icon(Icons.margin),
+
+ // Icon for My Chat
                 onTap: () {
                   // Action when "My Chat" menu is pressed
                   // Add your desired action here
                   Navigator.pop(context); // Close the drawer
                 },
               ),
-              ListTile(
-                dense: true,
-                title: Text("Question"),
-                leading: Icon(Icons.help), // Icon for Question
-                onTap: () {
-                  // Action when "Question" menu is pressed
-                  // Add your desired action here
-                  Navigator.pop(context); // Close the drawer
-                },
-              ),
+
             ],
           ),
         ),
-      ),)
+      ),
+      )
       );
   }
 }
