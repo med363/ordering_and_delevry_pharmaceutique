@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Feature/Login%20Screen/Login_Screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -46,7 +47,7 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
       padding: const EdgeInsets.only(top: 50),
       child: Stack(children: [
         CarouselSlider(
-            items: generateImagesTitle(),
+            items: generateImagesWithGesture(),
             options: CarouselOptions(
                 onPageChanged: (index, _) {
                   setState(() {
@@ -110,6 +111,31 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
          onDotClicked: _onIndicatorTapped,
 
 );
+List<Widget> generateImagesWithGesture() {
+  return images.asMap().entries.map((entry) {
+    int index = entry.key;
+    String image = entry.value;
+    return GestureDetector(
+      onTap: () {
+        // Handle the tap event here and navigate to another page.
+        // For example:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      },
+      child: ClipRRect(
+        child: Image.asset(
+          image,
+          fit: BoxFit.cover,
+          width: 1000,
+        ),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+    );
+  }).toList();
+}
+
 }
 
 
