@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Home/Pharmacy_Page.dart';
 
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
@@ -214,10 +215,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextButton(
                               onPressed: () {
                                 // Navigator.pop(context);
-                                // Navigator.of(context)
-                                //     .push(MaterialPageRoute(builder: (context) {
-                                //   return MyApp(isLogin: true);
-                                // }));
+                                Navigator.push(context, MaterialPageRoute(
+                                builder: (context)=> PharmacyPage()));
+
                               },
                               child: Text(
                                 "Login",

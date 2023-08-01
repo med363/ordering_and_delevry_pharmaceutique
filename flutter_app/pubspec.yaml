@@ -48,7 +48,8 @@ dependencies:
   shimmer: ^3.0.0
   get_storage: ^2.1.1
    # google_maps_flutter: ^2.0.10 # Replace with the latest version of the package
-google_places_flutter: ^2.0.6
+# google_places_flutter: ^2.0.6
+search_map_location: ^0.0.6
 
 
 dev_dependencies:
