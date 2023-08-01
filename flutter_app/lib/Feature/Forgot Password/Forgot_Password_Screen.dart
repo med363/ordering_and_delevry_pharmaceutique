@@ -33,10 +33,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             end: Alignment.bottomRight,
             stops: const [0.1, 0.4, 0.7, 0.9],
             colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
+              HexColor("#6FB9EE").withOpacity(0.8),
+              HexColor("#6FB9EE"),
+              HexColor("#6FB9EE"),
+              HexColor("#6FB9EE")
             ],
           ),
           image: DecorationImage(

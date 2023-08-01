@@ -67,10 +67,10 @@ class _PharmacyPageState extends State<PharmacyPage> {
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                 SearchLocation(
-        apiKey: // YOUR GOOGLE MAPS API KEY
-        onSelected: (Place place){
-        print(place.description);
+        //          SearchLocation(
+        // apiKey: // YOUR GOOGLE MAPS API KEY
+        // onSelected: (Place place){
+        // print(place.description);
                   // IconButton(
                   //   icon: Icon(Icons.camera_alt),
                   //   onPressed: () {
