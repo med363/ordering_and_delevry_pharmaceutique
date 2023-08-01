@@ -134,8 +134,10 @@ List<Widget> generateImagesWithGesture() {
       ),
     );
   }).toList();
-}
 
 }
 
 
+
+
+}
