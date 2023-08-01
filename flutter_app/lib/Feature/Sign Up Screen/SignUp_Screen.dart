@@ -39,7 +39,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home:
+    Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -47,10 +50,10 @@ class _SignupScreenState extends State<SignupScreen> {
             end: Alignment.bottomRight,
             stops: const [0.1, 0.4, 0.7, 0.9],
             colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
+               HexColor("#6FB9EE").withOpacity(0.8),
+               HexColor("#6FB9EE"),
+               HexColor("#6FB9EE"),
+               HexColor("#6FB9EE")
             ],
           ),
           image: DecorationImage(
@@ -95,7 +98,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Text(
                               "Create your account",
                               style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.black,
                                   letterSpacing: 0.5),
                             ),
                           ),
@@ -499,7 +502,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       const Text("If you have an account ",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 60, 51, 51),
                             letterSpacing: 0.5,
                           )),
                       GestureDetector(
@@ -512,7 +515,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         child: Text("Sing in",
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
                                 fontSize: 14)),
@@ -525,6 +528,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }
