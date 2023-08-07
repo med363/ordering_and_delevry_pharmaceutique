@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Home/HomePage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class PharmacyPage extends StatefulWidget {
@@ -45,7 +46,20 @@ class _PharmacyPageState extends State<PharmacyPage> {
               },
               ),
         ),
-        body: Container(
+        body: Column(
+          children: [
+             Container(
+            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: Text(
+                  'Choisis la pharmacie prés de toi',
+                  style: GoogleFonts.oswald(
+                    color: Colors.black,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+            ),
+        Container(
           padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
           child: TextField(
             decoration: InputDecoration(
@@ -71,6 +85,6 @@ class _PharmacyPageState extends State<PharmacyPage> {
             ),
           ),
         )
-        );
+        ]));
   }
 }
