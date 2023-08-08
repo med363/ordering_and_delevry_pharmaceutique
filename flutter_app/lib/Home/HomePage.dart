@@ -5,10 +5,8 @@ import 'package:flutter_app/Home/Pharmacy_Page.dart';
 import 'package:flutter_app/Home/Medication_Page.dart';
 import 'package:flutter_app/Home/Magazin_Page.dart';
 
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shimmer/shimmer.dart';
 import 'Carossel/caroussel.dart';
 import 'Question_Page.dart';
 
@@ -203,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       "What you search?",
-                      style: GoogleFonts.oswald(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -254,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign:
                                   TextAlign.center, // Center text horizontally
 
-                              style: GoogleFonts.oswald(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -301,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign:
                                   TextAlign.center, // Center text horizontally
 
-                              style: GoogleFonts.oswald(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -347,7 +345,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign:
                                   TextAlign.center, // Center text horizontally
 
-                              style: GoogleFonts.oswald(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -393,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign:
                                   TextAlign.center, // Center text horizontally
 
-                              style: GoogleFonts.oswald(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -697,7 +695,7 @@ class MostPopularTitle extends StatelessWidget {
         children: [
           Text(
             'Parapharmacie',
-            style: GoogleFonts.oswald(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 34,
               color: Color(0xFF212121),

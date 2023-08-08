@@ -392,14 +392,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
-  google_fonts:
-    dependency: "direct main"
-    description:
-      name: google_fonts
-      sha256: e20ff62b158b96f392bfc8afe29dee1503c94fbea2cbe8186fd59b756b8ae982
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.0"
   graphs:
     dependency: transitive
     description:
@@ -412,10 +404,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
+      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "0.13.6"
   http_multi_server:
     dependency: transitive
     description:
@@ -736,6 +728,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  search_map_location:
+    dependency: "direct main"
+    description:
+      name: search_map_location
+      sha256: "21308e8cac8eb908fc5c61266cb6f8f002ecbe77ba5c12da8681bce68ccc2d61"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   shelf:
     dependency: transitive
     description:
@@ -752,14 +752,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  shimmer:
-    dependency: "direct main"
-    description:
-      name: shimmer
-      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   simple_animations:
     dependency: "direct main"
     description:
