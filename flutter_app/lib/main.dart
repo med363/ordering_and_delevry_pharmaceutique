@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       title: 'My_pharmacy',
       home: MyHomePage(title: 'Flutter Demo Home Page'),
 
-      routes: {
-        '/login': (context) => LoginScreen(),
-        '/user': (context) => userpageApp(),
-      },
+      // routes: {
+      //   '/login': (context) => LoginScreen(),
+      //   '/user': (context) => userpageApp(),
+      // },
     );
   }
 }
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       routes: {
         '/login': (context) => LoginScreen(),
-         '/user': (context) => userpageApp(),
+        '/user': (context) => userpageApp(),
       },
     );
   }

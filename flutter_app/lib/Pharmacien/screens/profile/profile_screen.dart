@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/user/screens/profile/header.dart';
+import 'package:flutter_app/Pharmacien/screens/profile/header.dart';
 
 import '../../../Home/HomePage.dart';
 
@@ -50,22 +50,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ProfileOption.arrow(
             title: 'Edit Profile', icon: _profileIcon('user@2x.png')),
         ProfileOption.arrow(
-            title: 'My order', icon: _profileIcon('checkout.png')),
-        ProfileOption.arrow(
-            title: 'historique', icon: _profileIcon('histo.png')),
-        ProfileOption.arrow(
             title: 'Notification', icon: _profileIcon('notification@2x.png')),
         ProfileOption.arrow(
-            title: 'Payment', icon: _profileIcon('wallet@2x.png')),
+            title: 'localisation du pharmacie',
+            icon: _profileIcon('location@2x.png')),
         ProfileOption.arrow(
-            title: 'Security', icon: _profileIcon('shield_done@2x.png')),
+            title: 'stockages des medicaments',
+            icon: _profileIcon('medica.webp')),
         _languageOption(),
         _darkModel(),
         ProfileOption.arrow(
             title: 'Help Center', icon: _profileIcon('info_square@2x.png')),
-        ProfileOption.arrow(
-            title: 'Invite Friends', icon: _profileIcon('user@2x.png')),
-        ProfileOption(
+       ProfileOption(
           title: 'Logout',
           icon: _profileIcon('logout@2x.png'),
           titleColor: const Color(0xFFF75555),
@@ -150,12 +146,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       trailing: data.trailing,
       onTap: () {
-      if (data.title == 'Logout') {
+        // Check if the option is "Logout"
+        if (data.title == 'Logout') {
          Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         ); }
-
       },
     );
   }

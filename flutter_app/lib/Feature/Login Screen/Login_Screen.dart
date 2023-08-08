@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Home/Pharmacy_Page.dart';
-
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
 import '../Forgot Password/Forgot_Password_Screen.dart';
 import '../Sign Up Screen/SignUp_Screen.dart';
 import 'package:flutter_app/user/userpage.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../config.dart';
+import '../../Pharmacien/pharmacienpage.dart';
+
 enum FormData {
   Email,
   password,
@@ -27,15 +31,83 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
-  void _handleLoginButtonPress() {
-    // Perform any login-related logic here
-    // For now, let's assume the login is successful
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => userpageApp()), // Navigate to user page
-    );
+  bool _isNotValidate = false;
+  // late SharedPreferences prefs;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initSharedPref();
   }
+
+  void initSharedPref() async {
+    // prefs = await SharedPreferences.getInstance();
+  }
+
+  void loginUser() async {
+  if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+    var reqBody = {
+      "email": emailController.text,
+      "password": passwordController.text,
+    };
+
+    try {
+      // Attempt to log in as a user
+      var userResponse = await http.post(
+        Uri.parse(login_user),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(reqBody),
+      );
+
+      var userJsonResponse = jsonDecode(userResponse.body);
+      
+      if (userResponse.statusCode == 200 && userJsonResponse['status']) {
+        // User login successful
+        var userToken = userJsonResponse['token'];
+        // prefs.setString('token', userToken);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => userpageApp()),
+        );
+        print('User login successful');
+      } else {
+        // Handle login failure for user
+        print('User login failed');
+      }
+    } catch (e) {
+      // Handle exception during user login
+      print('Error during user login: $e');
+    }
+
+    try {
+      // Attempt to log in as a pharmacy
+      var pharmacyResponse = await http.post(
+        Uri.parse(login_pharmacien),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(reqBody),
+      );
+
+      var pharmacyJsonResponse = jsonDecode(pharmacyResponse.body);
+
+      if (pharmacyResponse.statusCode == 200 && pharmacyJsonResponse['status']) {
+        // Pharmacy login successful
+        var pharmacyToken = pharmacyJsonResponse['token'];
+        // prefs.setString('token', pharmacyToken);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => pharmacienpageApp()),
+        );
+        print('Pharmacy login successful');
+      } else {
+        // Handle login failure for pharmacy
+        print('Pharmacy login failed');
+      }
+    } catch (e) {
+      // Handle exception during pharmacy login
+      print('Error during pharmacy login: $e');
+    }
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   //   //   return MyApp(isLogin: true);
                                   //   // }));
                                   // },
-                                  onPressed: _handleLoginButtonPress,
+                                  onPressed: loginUser,
                                   child: Text(
                                     "Login",
                                     style: TextStyle(

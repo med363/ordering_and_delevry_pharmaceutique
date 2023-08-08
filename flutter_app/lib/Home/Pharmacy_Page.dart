@@ -57,6 +57,7 @@ class _PharmacyPageState extends State<PharmacyPage> {
                   ),
                 ),
             ),
+<<<<<<< HEAD
       Container(
             padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Column(
@@ -76,6 +77,31 @@ class _PharmacyPageState extends State<PharmacyPage> {
               ],
               
 
+=======
+        Container(
+          padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+          child: TextField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.camera_alt),
+                    onPressed: () {
+                      // Action lors du clic sur l'icône de l'appareil photo/vidéo
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.mic),
+                    onPressed: () {
+                      // Action lors du clic sur l'icône de la voix
+                    },
+                  ),
+                ],
+              ),
+              hintText: 'Rechercher des médicaments...',
+>>>>>>> chadha
             ),
           )
         ],

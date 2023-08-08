@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/Home/Pharmacy_Page.dart';
 import 'package:flutter_app/Home/Medication_Page.dart';
 import 'package:flutter_app/Home/Magazin_Page.dart';
+import 'package:flutter_app/Feature/Login Screen/Login_Screen.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -180,7 +181,11 @@ class _HomePageState extends State<HomePage> {
               child: IconButton(
                 icon: Icon(Icons.person),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                //  Navigator.pushNamed(context, '/login');
+                Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
                 },
               ),
             ),
