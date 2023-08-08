@@ -67,24 +67,19 @@ class _PharmacyPageState extends State<PharmacyPage> {
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-        //          SearchLocation(
-        // apiKey: // YOUR GOOGLE MAPS API KEY
-        // onSelected: (Place place){
-        // print(place.description);
-                  // IconButton(
-                  //   icon: Icon(Icons.camera_alt),
-                  //   onPressed: () {
-                  //     // Action lors du clic sur l'icône de l'appareil photo/vidéo
-                  //   },
-                  // ),
-                ]
-                //   IconButton(
-                //     icon: Icon(Icons.mic),
-                //     onPressed: () {
-                //       // Action lors du clic sur l'icône de la voix
-                //     },
-                //   ),
-                // ],
+                  IconButton(
+                    icon: Icon(Icons.camera_alt),
+                    onPressed: () {
+                      // Action lors du clic sur l'icône de l'appareil photo/vidéo
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.mic),
+                    onPressed: () {
+                      // Action lors du clic sur l'icône de la voix
+                    },
+                  ),
+                ],
               ),
               hintText: 'Rechercher des médicaments...',
             ),

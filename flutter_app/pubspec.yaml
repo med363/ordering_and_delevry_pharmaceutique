@@ -31,6 +31,7 @@ dependencies:
   
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.2
   google_fonts: ^5.1.0
   simple_animations: ^4.1.0
@@ -41,7 +42,9 @@ dependencies:
   image_picker: ^0.8.4+4
   flutter_svg: ^0.22.0 
   expandable_text: ^2.3.0
-  #http: ^0.12.2 #help fetch data from API
+  http: 
+  shared_preferences:
+  jwt_decoder:
   flutter_rating_bar: ^4.0.1
   #flutter_icons: ^2.0.0 # Check for the latest version on pub.dev
   font_awesome_flutter: ^10.5.0 # You can check the latest version on pub.dev
@@ -51,9 +54,16 @@ dependencies:
   shimmer: ^3.0.0
   get_storage: ^2.1.1
    # google_maps_flutter: ^2.0.10 # Replace with the latest version of the package
-# google_places_flutter: ^2.0.6
-search_map_location: ^0.0.6
-
+  google_places_flutter: ^2.0.6
+  qr_code_scanner: 
+  permission_handler: ^10.0.0
+  just_audio: 
+  barcode_scanner: ^3.6.1
+  logging: ^1.2.0
+  flutter_barcode_scanner: 
+  vibration:
+  camera: 
+  speech_to_text: ^6.0.0
 
 dev_dependencies:
   flutter_test:

@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shimmer/shimmer.dart';
+import '../Feature/Login Screen/Login_Screen.dart';
 import 'Carossel/caroussel.dart';
 import 'Question_Page.dart';
 
@@ -182,7 +183,11 @@ class _HomePageState extends State<HomePage> {
               child: IconButton(
                 icon: Icon(Icons.person),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                //  Navigator.pushNamed(context, '/login');
+                Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
                 },
               ),
             ),
