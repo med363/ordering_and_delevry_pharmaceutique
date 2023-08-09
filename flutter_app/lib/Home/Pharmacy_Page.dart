@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Home/HomePage.dart';
-import 'package:search_map_location/search_map_location.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+
 class PharmacyPage extends StatefulWidget {
   const PharmacyPage({super.key});
 
@@ -49,35 +51,14 @@ class _PharmacyPageState extends State<PharmacyPage> {
              Container(
             padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Text(
-                  'Choisis la pharmacie prés de vous',
-                  style: TextStyle(
+                  'Choisis la pharmacie prés de toi',
+                  style: GoogleFonts.oswald(
                     color: Colors.black,
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
             ),
-<<<<<<< HEAD
-      Container(
-            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-            child: Column(
-              children: [
-              // SearchLocation(
-              //         apiKey: '$placeApiKey', // YOUR GOOGLE MAPS API KEY
-              //         country: 'TN',
-              //         onSelected: (Place place){
-              //            _address=place.description;
-
-              //         },
-              // )
-              // decoration: InputDecoration(
-              //   prefixIcon: Icon(Icons.search),
-              //   hintText: 'Rechercher des médicaments...',
-              // ),
-              ],
-              
-
-=======
         Container(
           padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
           child: TextField(
@@ -101,17 +82,9 @@ class _PharmacyPageState extends State<PharmacyPage> {
                 ],
               ),
               hintText: 'Rechercher des médicaments...',
->>>>>>> chadha
             ),
-          )
-        ],
-      ),
-    );
+          ),
+        )
+        ]));
   }
 }
-
-
-
-
-
-

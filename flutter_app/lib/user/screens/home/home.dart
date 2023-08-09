@@ -12,6 +12,7 @@ import 'package:flutter_app/user/screens/special_offers/special_offers_screen.da
 
 class HomeScreen extends StatefulWidget {
   final String title;
+  
 
   static String route() => '/home';
 
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.fromLTRB(24, 24, 24, 0);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -34,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(top: 24),
             sliver: SliverAppBar(
               pinned: true,
-              flexibleSpace: HomeAppBar(),
+              flexibleSpace: HomeAppBar(email:'user',),
             ),
           ),
           SliverPadding(

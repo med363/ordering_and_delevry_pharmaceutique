@@ -30,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  final _formKey = GlobalKey<FormState>(); // Added _formKey variable
 
   bool _isNotValidate = false;
   // late SharedPreferences prefs;
@@ -67,7 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
         // prefs.setString('token', userToken);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => userpageApp()),
+          MaterialPageRoute(builder: (context) => userpageApp(
+                          // username: emailController.text, // Pass the email as a parameter
+
+          )),
         );
         print('User login successful');
       } else {
@@ -185,8 +189,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ? enabled
                                       : backgroundColor,
                                 ),
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextField(
+                                child: Form(
+                                  key:_formKey ,
+                                  child: Padding(padding:
+                                  const EdgeInsets.all(5.0), 
+                                  child: TextField(
                                   controller: emailController,
                                   onTap: () {
                                     setState(() {
@@ -217,7 +224,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                           : deaible,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12),
-                                ),
+                                    //    validator: (value) {
+                                    //   if (value.isEmpty) {
+                                    //     return 'Please enter your email';
+                                    //   }
+                                    //   return null;
+                                    // },
+
+  
+                                  ),
+                                )
+                                
+                               ),
                               ),
                             ),
                             const SizedBox(
