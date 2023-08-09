@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/user/components/chat_pages/group_page.dart';
 import 'package:flutter_app/user/screens/profile/profile_screen.dart';
+import 'package:uuid/uuid.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+  const HomeAppBar({super.key, required this.email, });
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +28,8 @@ class HomeAppBar extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
+                children:  [
+                  const Text(
                     'Good Morning 👋',
                     style: TextStyle(
                       color: Color(0xFF757575),
@@ -33,8 +37,8 @@ class HomeAppBar extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 6),
-                  Text(
-                    'Chadha Jamel',
+                   Text(
+                    email,
                     style: TextStyle(
                       color: Color(0xFF212121),
                       fontWeight: FontWeight.bold,
@@ -60,7 +64,15 @@ class HomeAppBar extends StatelessWidget {
           IconButton(
             iconSize: 28,
             icon: Image.asset('$kIconPath/light/chat.png'),
-            onPressed: () {},
+            onPressed: () {
+                  final uuid = Uuid(); // Create an instance of Uuid
+
+            Navigator.push(context,
+              MaterialPageRoute(
+                builder: (context) =>  GroupPage(
+                name:email, userId: uuid.v1(),
+                )));
+            },
           ),
         ],
       ),

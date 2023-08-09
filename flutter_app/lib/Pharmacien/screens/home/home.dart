@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(top: 24),
             sliver: SliverAppBar(
               pinned: true,
-              flexibleSpace: HomeAppBar(),
+              flexibleSpace: HomeAppBar(email:'pharmacie'),
             ),
           ),
           SliverPadding(
