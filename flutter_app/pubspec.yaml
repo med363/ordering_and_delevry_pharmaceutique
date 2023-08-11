@@ -31,6 +31,7 @@ dependencies:
   
   flutter:
     sdk: flutter
+  shared_preferences: ^2.2.0
 
   cupertino_icons: ^1.0.2
   google_fonts: ^5.1.0
@@ -42,9 +43,9 @@ dependencies:
   image_picker: ^0.8.4+4
   flutter_svg: ^0.22.0 
   expandable_text: ^2.3.0
-  http: 
-  shared_preferences:
-  jwt_decoder:
+  # http: 
+  # shared_preferences:
+  # jwt_decoder:
   flutter_rating_bar: ^4.0.1
   #flutter_icons: ^2.0.0 # Check for the latest version on pub.dev
   font_awesome_flutter: ^10.5.0 # You can check the latest version on pub.dev
@@ -66,7 +67,8 @@ dependencies:
   speech_to_text: ^6.0.0
   socket_io_client: ^2.0.3+1
   uuid: ^3.0.7
-
+  provider: ^6.0.5
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
