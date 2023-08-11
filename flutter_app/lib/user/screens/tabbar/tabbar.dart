@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/user/screens/home/home.dart';
 import 'package:flutter_app/user/screens/profile/profile_screen.dart';
@@ -35,8 +37,7 @@ class _FRTabbarScreenState extends State<FRTabbarScreen> {
 
   final screens = [
     const HomeScreen(
-      title: 'My_Pharma',
-    ),
+      title: 'My_Pharma'),
     const TestScreen(title: 'Notification'),
     const TestScreen(title: 'Orders'),
     const ProfileScreen(),

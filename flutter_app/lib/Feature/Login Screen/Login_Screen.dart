@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
+import '../../user/provider/user_provider.dart';
 import '../Forgot Password/Forgot_Password_Screen.dart';
 import '../Sign Up Screen/SignUp_Screen.dart';
 import 'package:flutter_app/user/userpage.dart';
@@ -32,6 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = new TextEditingController();
   final _formKey = GlobalKey<FormState>(); // Added _formKey variable
 
+  
+
   bool _isNotValidate = false;
   // late SharedPreferences prefs;
   @override
@@ -61,15 +65,20 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       var userJsonResponse = jsonDecode(userResponse.body);
-      
+      // final user= Provider.of<UserProvider>(context).user;
+
       if (userResponse.statusCode == 200 && userJsonResponse['status']) {
         // User login successful
         var userToken = userJsonResponse['token'];
+
+    //    print('User Name: $user'); // Debug print
+        print('User token: $userToken'); // Debug print
+
         // prefs.setString('token', userToken);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => userpageApp(
-                          // username: emailController.text, // Pass the email as a parameter
+          //  email: emailController.text, // Pass the email as a parameter
 
           )),
         );

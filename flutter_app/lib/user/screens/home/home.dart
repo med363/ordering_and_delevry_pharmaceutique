@@ -24,19 +24,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final datas = homePopularProducts;
-
+  
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.fromLTRB(24, 24, 24, 0);
-
+//search title how pass proprieter
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          const SliverPadding(
+           const SliverPadding(
             padding: EdgeInsets.only(top: 24),
             sliver: SliverAppBar(
               pinned: true,
-              flexibleSpace: HomeAppBar(email:'user',),
+              flexibleSpace:  HomeAppBar(),
             ),
           ),
           SliverPadding(

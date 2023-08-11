@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/user/components/chat_pages/group_page.dart';
+import 'package:flutter_app/user/provider/user_provider.dart';
 import 'package:flutter_app/user/screens/profile/profile_screen.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key, required this.email, });
+  const HomeAppBar({super.key });
 
-  final String email;
+
 
   @override
   Widget build(BuildContext context) {
+    final user= Provider.of<UserProvider>(context).user;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
@@ -38,7 +41,7 @@ class HomeAppBar extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                    Text(
-                    email,
+    user.name,
                     style: TextStyle(
                       color: Color(0xFF212121),
                       fontWeight: FontWeight.bold,
@@ -70,7 +73,7 @@ class HomeAppBar extends StatelessWidget {
             Navigator.push(context,
               MaterialPageRoute(
                 builder: (context) =>  GroupPage(
-                name:email, userId: uuid.v1(),
+                name:user.name, userId: uuid.v1(),
                 )));
             },
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
@@ -38,13 +39,21 @@ class _SignupScreenState extends State<SignupScreen> {
   File? _selectedImage;
 
   Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
-
-    if (pickedImage != null) {
-      setState(() {
+    try{
+    final pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+if (pickedImage == null) return;
+setState(() {
         _selectedImage = File(pickedImage.path);
       });
+    } on PlatformException catch(e) {
+      print('failed to pick image: $e');
     }
+
+    // if (pickedImage != null) {
+    //   setState(() {
+    //     _selectedImage = File(pickedImage.path);
+    //   });
+    // }
   }
 
   bool _isPasswordMatch() {
@@ -79,15 +88,20 @@ Future<void> registerUser() async {
       return;
     }
 
-    if (selectedProfession == "Pharmacien") {
-      var regBody = {
+ if (selectedProfession == "Pharmacien" ||
+      selectedProfession == "Médecien" ||
+      selectedProfession == "Infirmier" ||
+      selectedProfession == "Autre Profession santé") {
+    var imageBytes = _selectedImage!.readAsBytesSync();
+    var base64Image = base64Encode(imageBytes);
+          var regBody = {
         "name": nameController.text,
         "phone": phoneController.text,
         "email": emailController.text,
         "password": passwordController.text,
         "passwordconf": confirmPasswordController.text,
         "profession": selectedProfession,
-        // "image":_selectedImage,
+      "image": base64Image,
        
       };
 
