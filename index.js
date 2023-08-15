@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
-const db = require('./config/db');
 const body_parseer =require('body-parser');
 const userRouter = require('./routers/user.router')
-const UserModel = require('./model/user');
 const PharamacienRouter = require('./routers/pharmacien.route')
-const PharamacienModel = require('./model/pharmacien');
+const routerMedicament = require('./routers/medicament')
+
 const cors = require('cors');
 
 app.use(cors());
@@ -19,6 +18,7 @@ const io = require('socket.io')(server);
 app.use(body_parseer.json());
 app.use('/',userRouter);
 app.use('/',PharamacienRouter);
+app.use('/api',routerMedicament)
 app.get('/',(req,res)=> {
     res.send("hello world")
     
