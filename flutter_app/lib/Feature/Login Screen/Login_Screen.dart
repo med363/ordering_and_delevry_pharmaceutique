@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
-import '../../user/provider/user_provider.dart';
 import '../Forgot Password/Forgot_Password_Screen.dart';
 import '../Sign Up Screen/SignUp_Screen.dart';
 import 'package:flutter_app/user/userpage.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../config.dart';
@@ -32,12 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  final _formKey = GlobalKey<FormState>(); // Added _formKey variable
-
-  
 
   bool _isNotValidate = false;
-  // late SharedPreferences prefs;
+  late SharedPreferences prefs;
   @override
   void initState() {
     // TODO: implement initState
@@ -46,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void initSharedPref() async {
-    // prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
   }
 
   void loginUser() async {
@@ -65,22 +60,14 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       var userJsonResponse = jsonDecode(userResponse.body);
-      // final user= Provider.of<UserProvider>(context).user;
-
+      
       if (userResponse.statusCode == 200 && userJsonResponse['status']) {
         // User login successful
         var userToken = userJsonResponse['token'];
-
-    //    print('User Name: $user'); // Debug print
-        print('User token: $userToken'); // Debug print
-
-        // prefs.setString('token', userToken);
+        prefs.setString('token', userToken);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => userpageApp(
-          //  email: emailController.text, // Pass the email as a parameter
-
-          )),
+          MaterialPageRoute(builder: (context) => userpageApp()),
         );
         print('User login successful');
       } else {
@@ -105,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (pharmacyResponse.statusCode == 200 && pharmacyJsonResponse['status']) {
         // Pharmacy login successful
         var pharmacyToken = pharmacyJsonResponse['token'];
-        // prefs.setString('token', pharmacyToken);
+        prefs.setString('token', pharmacyToken);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => pharmacienpageApp()),
@@ -198,11 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ? enabled
                                       : backgroundColor,
                                 ),
-                                child: Form(
-                                  key:_formKey ,
-                                  child: Padding(padding:
-                                  const EdgeInsets.all(5.0), 
-                                  child: TextField(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextField(
                                   controller: emailController,
                                   onTap: () {
                                     setState(() {
@@ -233,18 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           : deaible,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12),
-                                    //    validator: (value) {
-                                    //   if (value.isEmpty) {
-                                    //     return 'Please enter your email';
-                                    //   }
-                                    //   return null;
-                                    // },
-
-  
-                                  ),
-                                )
-                                
-                               ),
+                                ),
                               ),
                             ),
                             const SizedBox(
