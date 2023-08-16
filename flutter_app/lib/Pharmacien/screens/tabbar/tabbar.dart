@@ -4,13 +4,13 @@ import 'package:flutter_app/Pharmacien/screens/profile/profile_screen.dart';
 import 'package:flutter_app/Pharmacien/screens/test/test_screen.dart';
 import 'package:flutter_app/Pharmacien/size_config.dart';
 
-
 class TabbarItem {
   final String lightIcon;
   final String boldIcon;
   final String label;
 
-  TabbarItem({required this.lightIcon, required this.boldIcon, required this.label});
+  TabbarItem(
+      {required this.lightIcon, required this.boldIcon, required this.label});
 
   BottomNavigationBarItem item(bool isbold) {
     return BottomNavigationBarItem(
@@ -24,7 +24,8 @@ class TabbarItem {
 }
 
 class FRTabbarScreen extends StatefulWidget {
-  const FRTabbarScreen({super.key});
+  final String username;
+  FRTabbarScreen({Key? key, required this.username});
 
   @override
   State<FRTabbarScreen> createState() => _FRTabbarScreenState();
@@ -32,15 +33,18 @@ class FRTabbarScreen extends StatefulWidget {
 
 class _FRTabbarScreenState extends State<FRTabbarScreen> {
   int _select = 0;
+late final List<Widget> screens;
 
-  final screens = [
-    const HomeScreen(
-      title: 'My_Pharma',
-    ),
-    const TestScreen(title: 'Notification'),
-    const TestScreen(title: 'Orders'),
-    const ProfileScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    screens = [
+      HomeScreen(title: 'My_Pharma', username: widget.username),
+      const TestScreen(title: 'Notification'),
+      const TestScreen(title: 'Orders'),
+      ProfileScreen(username: widget.username),
+    ];
+  }
 
   static Image generateIcon(String path) {
     return Image.asset(
@@ -56,7 +60,7 @@ class _FRTabbarScreenState extends State<FRTabbarScreen> {
       activeIcon: generateIcon('bold/Home@2x.png'),
       label: 'Home',
     ),
-     BottomNavigationBarItem(
+    BottomNavigationBarItem(
       icon: generateIcon('light/Bag@2x.png'),
       activeIcon: generateIcon('bold/R.jpeg'),
       label: 'Notification',
@@ -66,13 +70,11 @@ class _FRTabbarScreenState extends State<FRTabbarScreen> {
       activeIcon: generateIcon('bold/Buy@2x.png'),
       label: 'Orders',
     ),
-   
     BottomNavigationBarItem(
       icon: generateIcon('light/Profile@2x.png'),
       activeIcon: generateIcon('bold/Profile@2x.png'),
       label: 'Profile',
     ),
-
   ];
 
   @override
@@ -105,7 +107,6 @@ class _FRTabbarScreenState extends State<FRTabbarScreen> {
   }
 }
 
-
 class ImageLoader {
   static const String rootPaht = 'assets/icons';
 
@@ -113,4 +114,3 @@ class ImageLoader {
 
   static Image imageNet(String url) => Image.network(url);
 }
-

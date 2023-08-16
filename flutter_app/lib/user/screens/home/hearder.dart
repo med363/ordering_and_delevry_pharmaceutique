@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/user/screens/profile/profile_screen.dart';
 
+
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+  final String username;
+
+  HomeAppBar({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +15,14 @@ class HomeAppBar extends StatelessWidget {
         children: [
           InkWell(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
-            child: const CircleAvatar(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(username: username),
+                ),
+              );
+            },child: const CircleAvatar(
               backgroundImage: AssetImage('$kIconPath/me.png'),
               radius: 24,
             ),
@@ -24,9 +33,9 @@ class HomeAppBar extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'Good Morning 👋',
+                    'Good Morning Chère/Cher patient(te)👋',
                     style: TextStyle(
                       color: Color(0xFF757575),
                       fontWeight: FontWeight.w500,
@@ -34,9 +43,9 @@ class HomeAppBar extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    'Chadha Jamel',
+                    username, // Utilisez simplement "username" ici
                     style: TextStyle(
-                      color: Color(0xFF212121),
+                      color: Color.fromARGB(255, 38, 114, 177),
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,
@@ -67,4 +76,5 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 }
+
 const String kIconPath = 'assets/icons';

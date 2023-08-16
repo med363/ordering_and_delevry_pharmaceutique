@@ -3,7 +3,9 @@ import 'package:flutter_app/Pharmacien/screens/profile/profile_screen.dart';
 import 'medicine_list_screen.dart'; // Import the newly created medicine_list_screen.dart
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+ final String username;
+
+  HomeAppBar({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,13 @@ class HomeAppBar extends StatelessWidget {
         children: [
           InkWell(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
+            onTap: () =>
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(username: username),
+                ),
+              ),
             child: const CircleAvatar(
               backgroundImage: AssetImage('$kIconPath/me1.jpg'),
               radius: 24,
@@ -21,23 +29,32 @@ class HomeAppBar extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children:  [
                   Text(
-                    'Good Morning 👋',
+                    'Good Morning Chère/Cher pharmacien(ne)👋',
                     style: TextStyle(
                       color: Color(0xFF757575),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 6),
+                  // SizedBox(height: 6),
+                  // Text(
+                  //   'Chère/Cher pharmacien(ne)',
+                  //   style: TextStyle(
+                  //     color: Color.fromARGB(255, 14, 164, 119),
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  //   textAlign: TextAlign.start,
+                  // ),
+                 SizedBox(height:6),
                   Text(
-                    'Chère/Cher pharmacien(ne)',
+                    username, 
                     style: TextStyle(
-                      color: Color(0xFF212121),
+                      color: Color.fromARGB(255, 37, 103, 17),
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,

@@ -48,10 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       home: HomePage(),
 
-      routes: {
-        '/login': (context) => LoginScreen(),
-        '/user': (context) => userpageApp(),
-      },
+      // routes: {
+      //   '/login': (context) => LoginScreen(),
+      //   '/user': (context) => userpageApp(),
+      // },
     );
   }
 }

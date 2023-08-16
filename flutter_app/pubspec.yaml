@@ -53,7 +53,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   shimmer: ^3.0.0
   get_storage: ^2.1.1
-   # google_maps_flutter: ^2.0.10 # Replace with the latest version of the package
+  google_maps_flutter: ^2.0.10 # Replace with the latest version of the package
   google_places_flutter: ^2.0.6
   qr_code_scanner: 
   permission_handler: ^10.0.0
@@ -64,6 +64,7 @@ dependencies:
   vibration:
   camera: 
   speech_to_text: ^6.0.0
+ 
 
 dev_dependencies:
   flutter_test:

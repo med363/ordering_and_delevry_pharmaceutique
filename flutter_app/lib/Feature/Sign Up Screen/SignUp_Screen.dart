@@ -7,6 +7,7 @@ import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
 import '../Login Screen/Login_Screen.dart';
 import '../../config.dart';
+import 'package:http_parser/http_parser.dart';
 
 enum FormData { Name, Phone, Email, password, ConfirmPassword, Profession }
 
@@ -22,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Color backgroundColor = Color.fromARGB(255, 183, 208, 244);
   bool ispasswordev = true;
   bool isProfessional = false;
-  bool showImageField = false;
+  // bool showImageField = false;
 
   FormData? selected;
 
@@ -35,14 +36,16 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _isNotValidate = false;
 
   String? selectedProfession;
-  File? _selectedImage;
+XFile? _selectedImage; // Declare the _selectedImage variable
+  
+  var _imageName;
 
   Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
+   XFile? imageFile = await ImagePicker().pickImage(source: ImageSource.camera);
 
-    if (pickedImage != null) {
+    if (imageFile != null) {
       setState(() {
-        _selectedImage = File(pickedImage.path);
+        _selectedImage = imageFile;
       });
     }
   }
@@ -57,98 +60,128 @@ class _SignupScreenState extends State<SignupScreen> {
     'Autre Profession santé': Icons.work,
     'Non': Icons.bookmark_border_outlined
   };
-
-  
-Future<void> registerUser() async {
-  if (nameController.text.isNotEmpty &&
-      phoneController.text.isNotEmpty &&
-      emailController.text.isNotEmpty &&
-      passwordController.text.isNotEmpty &&
-      confirmPasswordController.text.isNotEmpty) {
-    if (!_isPasswordMatch()) {
-      setState(() {
-        _isNotValidate = true;
-      });
+Future<void> registerPharmacie() async {
+  try {
+    if (_selectedImage == null) {
+      print("Image is not selected");
       return;
     }
 
-    if (selectedProfession == null) {
-      setState(() {
-        _isNotValidate = true;
-      });
+    if (nameController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty ||
+        selectedProfession != "Pharmacien") {
+      print("All fields are required");
       return;
     }
+    
+    // Other validation checks
 
-    if (selectedProfession == "Pharmacien") {
-      var regBody = {
-        "name": nameController.text,
-        "phone": phoneController.text,
-        "email": emailController.text,
-        "password": passwordController.text,
-        "passwordconf": confirmPasswordController.text,
-        "profession": selectedProfession,
-        // "image":_selectedImage,
-       
-      };
+    var request = http.MultipartRequest(
+      "POST",
+      Uri.parse(registration_pharmacien),
+    );
 
-      var response = await http.post(
-        Uri.parse(registration_pharmacien),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(regBody),
+    // Construct the image file part
+    var imageBytes = await _selectedImage!.readAsBytes();
+    var imageFile = http.MultipartFile.fromBytes(
+      "image",
+      imageBytes,
+      filename: "image.jpg", // Provide a filename here
+      contentType: MediaType('image', 'jpeg'), // Use 'jpeg' instead of 'jpg'
+    );
+    
+    // Add the image file part to the request's files
+    request.files.add(imageFile);
+
+    // Add other fields to the request
+    request.fields["name"] = nameController.text;
+    request.fields["phone"] = phoneController.text;
+    request.fields["email"] = emailController.text;
+    request.fields["password"] = passwordController.text;
+    request.fields["passwordconf"] = confirmPasswordController.text;
+    request.fields["profession"] = selectedProfession!;
+
+    // Send the request
+    var response = await request.send();
+      
+    if (response.statusCode == 200) {
+      // Successfully uploaded image, now proceed with saving other data to the database
+      var jsonResponse = jsonDecode(await response.stream.bytesToString());
+        
+      // Here you should save the user data to your MongoDB database using your schema
+      // You can use a MongoDB client library for this purpose
+
+      print("Image Upload and Registration Successful");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
       );
-
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
-        print(jsonResponse['status']);
-        if (jsonResponse['status']) {
-          // User registration successful
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-          );
-        } else {
-          print("Something Went Wrong");
-        }
-      } else {
-        print("Failed to register user: ${response.statusCode}");
-      }
     } else {
-      var regBody = {
-        "name": nameController.text,
-        "phone": phoneController.text,
-        "email": emailController.text,
-        "password": passwordController.text,
-        "passwordconf": confirmPasswordController.text,
-      };
-
-      var response = await http.post(
-        Uri.parse(registration_user),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(regBody),
-      );
-
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
-        print(jsonResponse['status']);
-        if (jsonResponse['status']) {
-          // User registration successful
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-          );
-        } else {
-          print("Something Went Wrong");
-        }
-      } else {
-        print("Failed to register user: ${response.statusCode}");
-      }
+      print("Image Upload Failed with Status Code: ${response.statusCode}");
     }
-  } else {
-    setState(() {
-      _isNotValidate = true;
-    });
+  } catch (error) {
+    print("Error during registration: $error");
   }
 }
+
+
+
+
+
+
+  
+  Future<void> registerUser() async {
+    if (nameController.text.isNotEmpty &&
+        phoneController.text.isNotEmpty &&
+        emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty &&
+        confirmPasswordController.text.isNotEmpty &&
+        selectedProfession == "Non") {
+      // Other validation checks
+
+      var regBody = {
+        "name": nameController.text,
+        "phone": phoneController.text,
+        "email": emailController.text,
+        "password": passwordController.text,
+        "passwordconf": confirmPasswordController.text,
+      };
+
+      try {
+        var response = await http.post(
+          Uri.parse(registration_user),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(regBody),
+        );
+
+        if (response.statusCode == 200) {
+          var jsonResponse = jsonDecode(response.body);
+          print(jsonResponse['status']);
+          if (jsonResponse['status']) {
+            // User registration successful
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+            );
+          } else {
+            print("Something Went Wrong");
+          }
+        } else {
+          print("Failed to register user: ${response.statusCode}");
+        }
+      } catch (error) {
+        print("Error during registration: $error");
+      }
+    } else {
+      setState(() {
+        _isNotValidate = true;
+      });
+    }
+  }
+
  
   List<String> professions = [
     'Médecien',
@@ -598,69 +631,69 @@ Future<void> registerUser() async {
                             ),
 
                             // Photo du carte du travaille?
-                            FadeAnimation(
-                              delay: 1,
-                              child: Container(
-                                width: 300,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  color: selected == FormData.Profession
-                                      ? enabled
-                                      : backgroundColor,
-                                ),
-                                padding: const EdgeInsets.all(5.0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    PickedFile? imageFile =
-                                        await ImagePicker().getImage(
-                                      source: ImageSource.camera,
-                                    );
+FadeAnimation(
+  delay: 1,
+  child: Container(
+    width: 300,
+    height: 40,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12.0),
+      color: selected == FormData.Profession
+          ? enabled
+          : backgroundColor,
+    ),
+    padding: const EdgeInsets.all(5.0),
+    child: InkWell(
+      onTap: () async {
+        XFile? imageFile = await ImagePicker().pickImage(
+          source: ImageSource.camera,
+        );
 
-                                    if (imageFile != null) {
-                                      setState(() {
-                                        _selectedImage = File(imageFile.path);
-                                      });
-                                    }
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Icon(
-                                          Icons.camera_alt,
-                                          color: selected == FormData.Profession
-                                              ? enabledtxt
-                                              : deaible,
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          'Photo du carte du travaille?',
-                                          style: TextStyle(
-                                            color:
-                                                selected == FormData.Profession
-                                                    ? enabledtxt
-                                                    : deaible,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ),
-                                      Radio<bool>(
-                                        value: true,
-                                        groupValue: isProfessional,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isProfessional = value!;
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+        if (imageFile != null) {
+          setState(() {
+            _selectedImage = imageFile;
+            _imageName = imageFile.name; // Store the name of the selected image
+          });
+        }
+      },
+      child: Row( // Use a Row to align the icon and text
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.camera_alt,
+              color: selected == FormData.Profession
+                  ? enabledtxt
+                  : deaible,
+              size: 20,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              _imageName != null
+                  ? 'Image ajoutée: $_imageName'
+                  : 'Photo du carte du travaille?',
+              style: TextStyle(
+                color: selected == FormData.Profession
+                    ? enabledtxt
+                    : deaible,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
+
+
+
+
+
+
+
                              const SizedBox(
                               height: 25,
                             ),
@@ -671,7 +704,9 @@ Future<void> registerUser() async {
                                     setState(() {
                                       _isNotValidate = false;
                                     });
+                                    /*register*/
                                     registerUser();
+                                    registerPharmacie();
                                   },
                                   child: Text(
                                     "Sign Up",

@@ -4,6 +4,9 @@ import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
 import '../Login Screen/Login_Screen.dart';
 import '../Pin Code/Pin_Code_Screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../config.dart';
 
 enum FormData { Email }
 
@@ -23,6 +26,38 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   TextEditingController emailController = new TextEditingController();
 
+  void CodeUser() async {
+    if (emailController.text.isNotEmpty) {
+      var reqBody = {"email": emailController.text};
+
+      try {
+        var userResponse = await http.post(
+          Uri.parse(forgetpass_user),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(reqBody),
+        );
+
+        if (userResponse.statusCode == 200) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PinCodeVerificationScreen()),
+          );
+           print('email bien envoyer');
+        } else {
+          // Handle non-200 status code
+          print('Server returned status code ${userResponse.statusCode}');
+        }
+      } catch (e) {
+        // Handle exception during user login
+        print('Error during user login: $e');
+      }
+    } else {
+      print('Email field is empty');
+    }
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +78,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-           image: AssetImage('assets/images/1.jpg'),
+            image: AssetImage('assets/images/1.jpg'),
           ),
         ),
         child: Center(
@@ -104,9 +139,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             child: TextField(
                               controller: emailController,
                               onTap: () {
-                                setState(() {
-                                  selected = FormData.Email;
-                                });
+                                // setState(() {
+                                //   selected = FormData.Email;
+                                // });
                               },
                               decoration: InputDecoration(
                                 enabledBorder: InputBorder.none,
@@ -142,13 +177,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           delay: 1,
                           child: TextButton(
                               onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
-                                  return const PinCodeVerificationScreen(
-                                    phoneNumber: '0102756960',
-                                  );
-                                }));
+                                //Navigator.pop(context);
+                                //   Navigator.of(context)
+                                //       .push(MaterialPageRoute(builder: (context) {
+                                //     return const PinCodeVerificationScreen(
+                                //        phoneNumber: '0102756960',
+                                //     );
+                                //   }));
+                                CodeUser();
                               },
                               child: Text(
                                 "Continue",

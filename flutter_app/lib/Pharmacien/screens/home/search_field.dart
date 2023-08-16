@@ -3,6 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'Vente_liste.dart';
 import 'add_medication_page.dart';
+import 'PharmacyLocationMapScreen.dart';
+import 'ModifyPharmacyLocationPage.dart';
+import 'DeclaratioPharmacy.dart';
+import 'StockagePharmacy.dart';
+
 
 class Category {
   const Category(this.icon, this.title, this.id);
@@ -10,6 +15,13 @@ class Category {
   final String icon;
   final String title;
   final String id;
+}
+
+class Pharmacy {
+  String name;
+  String location;
+
+  Pharmacy({required this.name, required this.location});
 }
 
 final homeCategories = <Category>[
@@ -24,15 +36,13 @@ final homeCategories = <Category>[
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
 
+  void showVenteOptions(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => VenteOptionsPage()),
+    );
+  }
 
-void showVenteOptions(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => VenteOptionsPage()),
-  );
-}
-
-  
   void showPharmacyOptions(BuildContext context) {
     showDialog(
       context: context,
@@ -57,11 +67,15 @@ void showVenteOptions(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ElevatedButton(
-                onPressed: () {
-                  // Handle "Modifier Localisation du Pharmacie" action here
+                onPressed: () async {
                   log('Modifier Localisation du Pharmacie');
-                  Navigator.pop(context);
-                  // Close the dialog
+                  Navigator.pop(context); // Close the dialog
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ModifyPharmacyLocationPage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary:
@@ -77,15 +91,20 @@ void showVenteOptions(BuildContext context) {
                   style: TextStyle(fontSize: 20),
                 ),
               ),
-               SizedBox(height: 15), // Add spacing between buttons
+              SizedBox(height: 15), // Add spacing between buttons
               ElevatedButton(
                 onPressed: () {
                   // Handle "Contacter Autre Pharmacie" action here
                   log('stockage pharmaceutique ');
                   Navigator.pop(context);
-                  // Close the dialog
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StockagePharmacy(),
+                    ),
+                  );
                 },
-                 style: ElevatedButton.styleFrom(
+                style: ElevatedButton.styleFrom(
                   primary:
                       Colors.white, // Use white color for the button background
                   onPrimary: Color.fromARGB(
@@ -99,9 +118,37 @@ void showVenteOptions(BuildContext context) {
                   style: TextStyle(fontSize: 20),
                 ),
               ),
-          
+
+              SizedBox(height: 15), // Add spacing between buttons
+              ElevatedButton(
+                onPressed: () {
+                  // Handle "Contacter Autre Pharmacie" action here
+                  log('Déclarer une rupture ');
+                  Navigator.pop(context);
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DeclaratioPharmacy(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary:
+                      Colors.white, // Use white color for the button background
+                  onPrimary: Color.fromARGB(
+                      255, 21, 228, 66), // Use the green color for text
+                  side: BorderSide(
+                      color: Color.fromARGB(255, 21, 228, 66),
+                      width: 2), // Add a border to simulate the glass effect
+                ),
+                child: Text(
+                  'Déclarer une rupture',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+
               SizedBox(height: 15),
-               // Add spacing between buttons
+              // Add spacing between buttons
               ElevatedButton(
                 onPressed: () {
                   // Handle "Contacter Délégué" action here
@@ -131,7 +178,7 @@ void showVenteOptions(BuildContext context) {
                   Navigator.pop(context);
                   // Close the dialog
                 },
-                 style: ElevatedButton.styleFrom(
+                style: ElevatedButton.styleFrom(
                   primary:
                       Colors.white, // Use white color for the button background
                   onPrimary: Color.fromARGB(
@@ -368,8 +415,7 @@ void showVenteOptions(BuildContext context) {
                       } else if (category.id == 'vente') {
                         // Show the pharmacy options dialog
                         showVenteOptions(context);
-                      }
-                      else {
+                      } else {
                         log('Selected category: ${category.title}');
                       }
                     },
@@ -405,4 +451,3 @@ void showVenteOptions(BuildContext context) {
     );
   }
 }
-
