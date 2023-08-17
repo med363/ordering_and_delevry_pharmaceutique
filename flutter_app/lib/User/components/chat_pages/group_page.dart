@@ -7,10 +7,10 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'msg_model.dart';
 
 class GroupPage extends StatefulWidget {
-  final String name;
+  final String username;
   final String userId;
 
-   GroupPage({Key? key, required this.name, required this.userId})
+   GroupPage({Key? key,  required this.userId, required this.username})
       : super(key: key) {
 
       }
@@ -130,7 +130,7 @@ class _GroupPageState extends State<GroupPage> {
                         onPressed: () {
                           String msg = _msgcontroller.text;
                           if (msg.isNotEmpty) {
-                            sendMsg(msg, widget.name);
+                            sendMsg(msg, widget.username);
                             _msgcontroller.clear();
                           }
                         },

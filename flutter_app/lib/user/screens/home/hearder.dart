@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/user/components/chat_pages/group_page.dart';
-import 'package:flutter_app/user/provider/user_provider.dart';
 import 'package:flutter_app/user/screens/profile/profile_screen.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
+
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key });
+  final String username;
 
-
+  HomeAppBar({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final user= Provider.of<UserProvider>(context).user;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         children: [
           InkWell(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
-            child: const CircleAvatar(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(username: username),
+                ),
+              );
+            },child: const CircleAvatar(
               backgroundImage: AssetImage('$kIconPath/me.png'),
               radius: 24,
             ),
@@ -31,19 +34,19 @@ class HomeAppBar extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:  [
-                  const Text(
-                    'Good Morning 👋',
+                children: [
+                  Text(
+                    'Good Morning Chère/Cher patient(te)👋',
                     style: TextStyle(
                       color: Color(0xFF757575),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(height: 6),
-                   Text(
-    user.name,
+                  Text(
+                    username, // Utilisez simplement "username" ici
                     style: TextStyle(
-                      color: Color(0xFF212121),
+                      color: Color.fromARGB(255, 38, 114, 177),
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,
@@ -68,13 +71,12 @@ class HomeAppBar extends StatelessWidget {
             iconSize: 28,
             icon: Image.asset('$kIconPath/light/chat.png'),
             onPressed: () {
-                  final uuid = Uuid(); // Create an instance of Uuid
-
-            Navigator.push(context,
-              MaterialPageRoute(
-                builder: (context) =>  GroupPage(
-                name:user.name, userId: uuid.v1(),
-                )));
+                  Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GroupPage(userId: '', username: '',), // Replace with the appropriate GroupPage widget
+      ),
+    );
             },
           ),
         ],
@@ -82,4 +84,5 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 }
+
 const String kIconPath = 'assets/icons';
