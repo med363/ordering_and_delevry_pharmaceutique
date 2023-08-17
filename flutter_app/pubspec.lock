@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.13.0"
+  animations:
+    dependency: "direct main"
+    description:
+      name: animations
+      sha256: fe8a6bdca435f718bb1dc8a11661b2c22504c6da40ef934cee8327ed77934164
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   archive:
     dependency: transitive
     description:
@@ -560,6 +568,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  hovering:
+    dependency: "direct main"
+    description:
+      name: hovering
+      sha256: "0df77800487be6d29c8687fb775f53e1b308988c6e63a6a9c579cec701fbfe76"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   html:
     dependency: transitive
     description:

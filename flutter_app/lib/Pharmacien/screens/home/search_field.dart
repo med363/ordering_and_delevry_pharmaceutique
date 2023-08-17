@@ -1,5 +1,7 @@
 import 'dart:developer';
-
+import '../../../config.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'Vente_liste.dart';
 import 'add_medication_page.dart';
@@ -33,14 +35,26 @@ final homeCategories = <Category>[
   const Category('assets/icons/category_others@2x.png', 'Others', 'other'),
 ];
 
+//VenteOptionsPage
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
 
-  void showVenteOptions(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => VenteOptionsPage()),
-    );
+  Future<void> showVenteOptions(BuildContext context) async {
+   final response = await http.get(Uri.parse(all_achat));
+  
+    if (response.statusCode == 200) {
+      Map<String, dynamic> achat = jsonDecode(response.body);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VenteOptionsPage(achat:achat),
+        ),
+      );
+    } else {
+      // Handle error
+      print('Failed to fetch stock from the server.');
+    }
   }
 
   void showPharmacyOptions(BuildContext context) {

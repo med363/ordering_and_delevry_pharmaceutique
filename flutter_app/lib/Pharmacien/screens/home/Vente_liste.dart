@@ -1,113 +1,160 @@
 import 'package:flutter/material.dart';
 
 class VenteOptionsPage extends StatelessWidget {
+  final Map<String, dynamic> achat;
+
+  VenteOptionsPage({required this.achat});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Options de vente'),
+        title: Text('Listes du vente'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          elevation: 4.0,
-          child: buildVenteOptionsTable(),
-          color: Color.fromARGB(255, 139, 232, 131),
-        ),
-      ),
-    );
-  }
-
-  Widget buildVenteOptionsTable() {
-    List<Map<String, dynamic>> venteOptions = [
-      {
-        'nom': 'Option 1',
-        'prix': 10.0,
-        'quantite': 5,
-        'nomUtilisateur': 'Utilisateur 1',
-        'ordonnance': 'Oui',
-      },
-      {
-        'nom': 'Option 2',
-        'prix': 15.0,
-        'quantite': 3,
-        'nomUtilisateur': 'Utilisateur 2',
-        'ordonnance': 'Non',
-      },
-      // Ajoutez d'autres éléments de données ici
-    ];
-
-    return DataTable(
-      columnSpacing: 50.0,
-      horizontalMargin: 20.0,
-      headingRowHeight: 50.0,
-      dataRowHeight: 60.0,
-      
-      columns: [
-        DataColumn(
-          label: Text(
-            'Nom',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Prix',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Quantité',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Nom Utilisateur',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Ordonnance',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-      ],
-      rows: venteOptions.map(
-        (option) {
-          return DataRow(cells: [
-            DataCell(
-              Container(
-                width: 80,
-                child: Text(option['nom']),
-              ),
-            ),
-            DataCell(Text(
-              option['prix'].toString(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-            DataCell(Text(
-              option['quantite'].toString(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-            DataCell(
-              Container(
-                width: 120,
-                child: Text(
-                  option['nomUtilisateur'],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: DataTable(
+          columns: const <DataColumn>[
+            DataColumn(
+              label: Text(
+                'Noms',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(
+                      255, 6, 19, 134), // Change the text color to white
                 ),
               ),
             ),
-            DataCell(Text(
-              option['ordonnance'],
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-          ]);
-        },
-      ).toList(),
+            DataColumn(
+              label: Text(
+                'Type',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(
+                      255, 6, 19, 134), // Change the text color to white
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Nbre',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(
+                      255, 6, 19, 134), // Change the text color to white
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Prix',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(
+                      255, 6, 19, 134), // Change the text color to white
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Patient(e)',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(
+                      255, 6, 19, 134), // Change the text color to white
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Ordonnance',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(
+                      255, 6, 19, 134), // Change the text color to white
+                ),
+              ),
+            ),
+          ],
+          rows: List<DataRow>.generate(
+            achat['achat'].length,
+            (index) => DataRow(
+              cells: <DataCell>[
+                DataCell(
+                  Text(
+                    '${achat['achat'][index]['noms'] ?? 'N/A'}',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(167, 43, 166, 238), // Change the text color to white
+                    ),
+                  ),
+                ),
+             
+               DataCell(
+                  Text(
+                    '${achat['achat'][index]['type'] ?? 'N/A'}',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(167, 43, 166, 238), // Change the text color to white
+                    ),
+                  ),
+                ),
+             
+               DataCell(
+                  Text(
+                    '${achat['achat'][index]['Number'] ?? 'N/A'}',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(167, 43, 166, 238), // Change the text color to white
+                    ),
+                  ),
+                ),
+             
+               DataCell(
+                  Text(
+                    '${achat['achat'][index]['prix'] ?? 'N/A'}',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(167, 43, 166, 238), // Change the text color to white
+                    ),
+                  ),
+                ),
+                 DataCell(
+                  Text(
+                    '${achat['achat'][index]['patient'] ?? 'indefini'}',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(167, 43, 166, 238), // Change the text color to white
+                    ),
+                  ),
+                ),
+             
+                 DataCell(
+                  Text(
+                    '${achat['achat'][index]['ordonnance'] ?? 'N/A'}',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(167, 43, 166, 238), // Change the text color to white
+                    ),
+                  ),
+                ),
+               
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

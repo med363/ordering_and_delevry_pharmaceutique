@@ -64,6 +64,8 @@ dependencies:
   vibration:
   camera: 
   speech_to_text: ^6.0.0
+  hovering: ^1.0.0
+  animations: ^2.0.0
  
 
 dev_dependencies:
