@@ -2,7 +2,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/user/size_config.dart';
 
-
+import 'achat.dart';
 
 class ShopDetailScreen extends StatefulWidget {
   const ShopDetailScreen({super.key});
@@ -82,7 +82,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
           ),
           IconButton(
             onPressed: () => setState(() => _iscollected = !_iscollected),
-            icon: Image.asset('assets/icons/${_iscollected ? 'bold' : 'light'}/heart@2x.png'),
+            icon: Image.asset(
+                'assets/icons/${_iscollected ? 'bold' : 'light'}/heart@2x.png'),
             iconSize: 28,
           ),
         ],
@@ -119,13 +120,15 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
 
   List<Widget> _buildDescription() {
     return [
-      const Text('Description', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      const Text('Description',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       const SizedBox(height: 8),
       const ExpandableText(
         '********************************************************',
         expandText: 'view more',
         collapseText: 'view less',
-        linkStyle: TextStyle(color: Color(0xFF424242), fontWeight: FontWeight.bold),
+        linkStyle:
+            TextStyle(color: Color(0xFF424242), fontWeight: FontWeight.bold),
       ),
     ];
   }
@@ -133,7 +136,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
   Widget _buildQuantity() {
     return Row(
       children: [
-        const Text('Quantity', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        const Text('Quantity',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         const SizedBox(width: 20),
         Container(
           decoration: const BoxDecoration(
@@ -146,7 +150,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
             child: Row(
               children: [
                 InkWell(
-                  child: Image.asset('assets/icons/detail/minus@2x.png', scale: 2),
+                  child:
+                      Image.asset('assets/icons/detail/minus@2x.png', scale: 2),
                   onTap: () {
                     if (_quantity <= 0) return;
                     setState(() => _quantity -= 1);
@@ -160,7 +165,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                     )),
                 const SizedBox(width: 20),
                 InkWell(
-                  child: Image.asset('assets/icons/detail/plus@2x.png', scale: 2),
+                  child:
+                      Image.asset('assets/icons/detail/plus@2x.png', scale: 2),
                   onTap: () => setState(() => _quantity += 1),
                 ),
               ],
@@ -191,7 +197,12 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
             child: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(29)),
               // splashColor: const Color(0xFFEEEEEE),
-              onTap: () {},
+              onTap: () {
+      Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CartFormScreen()),
+          );
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -228,9 +239,13 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('Total price', style: TextStyle(color: Color(0xFF757575), fontSize: 12)),
+                    Text('Total price',
+                        style:
+                            TextStyle(color: Color(0xFF757575), fontSize: 12)),
                     SizedBox(height: 6),
-                    Text('\52.900TN', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                    Text('\52.900TN',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 24)),
                   ],
                 ),
                 buildAddCard()
