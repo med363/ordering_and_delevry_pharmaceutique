@@ -161,4 +161,3 @@ class _QRViewExampleState extends State<QRViewExample> {
     super.dispose();
   }
 }
-

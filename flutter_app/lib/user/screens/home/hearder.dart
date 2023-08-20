@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/user/components/chat_pages/group_page.dart';
 import 'package:flutter_app/user/screens/profile/profile_screen.dart';
-
+import 'package:uuid/uuid.dart';
 
 class HomeAppBar extends StatelessWidget {
   final String username;
-
+  var uuid=Uuid();
   HomeAppBar({Key? key, required this.username}) : super(key: key);
 
   @override
@@ -74,7 +74,7 @@ class HomeAppBar extends StatelessWidget {
                   Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GroupPage(userId: '', username: '',), // Replace with the appropriate GroupPage widget
+        builder: (context) => GroupPage(userId: uuid.v1(), username: username,), // Replace with the appropriate GroupPage widget
       ),
     );
             },

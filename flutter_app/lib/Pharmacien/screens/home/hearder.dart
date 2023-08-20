@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pharmacien/screens/profile/profile_screen.dart';
+import 'package:flutter_app/user/components/chat_pages/group_page.dart';
 import 'medicine_list_screen.dart'; // Import the newly created medicine_list_screen.dart
+import 'package:uuid/uuid.dart';
 
 class HomeAppBar extends StatelessWidget {
  final String username;
-
+var uuid= Uuid();
   HomeAppBar({Key? key, required this.username}) : super(key: key);
 
   @override
@@ -43,21 +45,22 @@ class HomeAppBar extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-username,                    style: TextStyle(
+                      username, 
+                      style: TextStyle(
                       color: Color.fromARGB(255, 14, 164, 119),
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,
                   ),
-                 SizedBox(height:6),
-                  Text(
-                    username, 
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 37, 103, 17),
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
+                //  SizedBox(height:6),
+                //   Text(
+                //     username, 
+                //     style: TextStyle(
+                //       color: Color.fromARGB(255, 37, 103, 17),
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //     textAlign: TextAlign.start,
+                //   ),
                 ],
               ),
             ),
@@ -71,7 +74,14 @@ username,                    style: TextStyle(
           IconButton(
             iconSize: 28,
             icon: Image.asset('$kIconPath/light/chat.png'),
-            onPressed: () {},
+                        onPressed: () {
+                  Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GroupPage(userId: uuid.v1(), username: username,), // Replace with the appropriate GroupPage widget
+      ),
+    );
+            },
           ),
           const SizedBox(width: 16),
           IconButton(

@@ -13,7 +13,7 @@ class OwnMsgWidget extends StatelessWidget {
           maxWidth: MediaQuery.of(context).size.width - 60,
         ),
         child: Card(
-          color: Color.fromARGB(255, 244, 147, 231),
+          color: Color.fromARGB(255, 38, 114, 177),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -25,7 +25,7 @@ class OwnMsgWidget extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(136, 25, 32, 132)),
+                  color: Colors.white,),
                 ),
                 const SizedBox(
                   height: 3,
@@ -34,7 +34,7 @@ class OwnMsgWidget extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  color: Color.fromARGB(255, 203, 229, 7)),
                 ),                
               ],
             ),),

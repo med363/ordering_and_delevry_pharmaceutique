@@ -1,15 +1,36 @@
 import 'package:flutter/material.dart';
+import '../../../config.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class DeclaratioPharmacy extends StatefulWidget {
   @override
-  _DeclaratioPharmacyState createState() =>
-      _DeclaratioPharmacyState();
+  _DeclaratioPharmacyState createState() => _DeclaratioPharmacyState();
 }
 
-class _DeclaratioPharmacyState
-    extends State<DeclaratioPharmacy> {
-  TextEditingController _locationController = TextEditingController();
+class _DeclaratioPharmacyState extends State<DeclaratioPharmacy> {
   TextEditingController _nameController = TextEditingController();
+
+  Future<void> register() async {
+    if (_nameController.text.isNotEmpty) {
+      var regBody = {"Name_medicament": _nameController.text};
+
+      var response = await http.post(
+        Uri.parse(repture_pharmacy),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(regBody),
+      );
+
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        //print(jsonResponse['status']);
+        Navigator.pop(context);
+        print("bien enregistrer");
+      } else {
+        print("Something Went Wrong");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +59,15 @@ class _DeclaratioPharmacyState
               ),
             ),
             TextFormField(
-              controller: _locationController,
+              controller: _nameController,
               decoration: InputDecoration(
                 hintText: 'Entrer le medicament ',
               ),
             ),
-          
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                // Handle the form submission and update the pharmacy location and name
-                String newLocation = _locationController.text;
-                String newName = _nameController.text;
-                // Update the pharmacy location and name logic here
-
-                // Navigate back to the previous screen
-                Navigator.pop(context);
+                register();
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.green, // Change the button color to green

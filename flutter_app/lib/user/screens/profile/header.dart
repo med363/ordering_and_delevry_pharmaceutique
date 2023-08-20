@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/user/screens/home/home.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String username;
@@ -21,7 +22,10 @@ class ProfileHeader extends StatelessWidget {
               IconButton(
                 iconSize: 28,
                 icon: Image.asset('assets/icons/tabbar/light/more_circle@2x.png', scale: 2),
-                onPressed: () {},
+              onPressed: () {
+                // Navigate to the HomeScreen
+                Navigator.pushNamed(context, HomeScreen.route()); // Use the route() method to get the route
+              },
               ),
             ],
           ),

@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import '../../../config.dart';
 import 'package:http/http.dart' as http;
@@ -23,14 +25,16 @@ class _ModifyPharmacyLocationPageState
       };
 
       var response = await http.post(
-        Uri.parse(donnes_pharmacy),
+        Uri.parse(information_pharmacy),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regBody),
       );
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
-        print(jsonResponse['status']);
+         Navigator.pop(context);
+        //print(jsonResponse['status']);
+          print("bien enregistrer");
       } else {
         print("Something Went Wrong");
       }
@@ -89,7 +93,7 @@ class _ModifyPharmacyLocationPageState
                 register();
 
                 // Navigate back to the previous screen
-                // Navigator.pop(context);
+              
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.green, // Change the button color to green

@@ -7,4 +7,13 @@ final login_pharmacien = url + 'login_pharmacien';
 final forgetpass_user = url + 'forgetpass_user';
 final code_user = url + 'code_user';
 
-final donnes_pharmacy = url + 'donnes_pharmacy';
+final information_pharmacy = url + 'information_pharmacy';
+final repture_pharmacy = url + 'repture_pharmacy';
+final stocke_pharmacy = url + 'stocke_pharmacy';
+
+
+final all_stocks = url + 'all_stocks';
+final all_repture= url + 'all_repture';
+
+final achat_cbn = url + 'achat_cbn';
+final all_achat= url + 'all_achat';
