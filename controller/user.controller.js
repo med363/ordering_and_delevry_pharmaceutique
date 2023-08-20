@@ -27,7 +27,7 @@ const UserService = require('../services/user.services')
         let tokenData;
         tokenData = { _id: user._id, email: user.email };
         const token = await UserService.generateAccessToken(tokenData,"secret","1h")
-        res.status(200).json({ status: true, success: "sendData", token: token });
+        res.status(200).json({ status: true, success: "sendData", token: token,username:user.name });
         console.log('login user successful');
     } catch (error) {
         console.log(error, 'err---->');

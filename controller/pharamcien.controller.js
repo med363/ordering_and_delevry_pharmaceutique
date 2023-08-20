@@ -39,7 +39,7 @@ exports.register = async (req, res, next) => {
         // Creating Token
         const tokenDatap = { _id: pharma._id, email: pharma.email };
         const tokenp = await PharmacienService.generateAccessTokenp(tokenDatap, "secret", "1h");
-        res.status(200).json({ status: true, success: "sendData", token: tokenp });
+        res.status(200).json({ status: true, success: "sendData", token: tokenp ,username:pharma.name});
         console.log('login successful');
     } catch (error) {
         console.log(error, 'err---->');

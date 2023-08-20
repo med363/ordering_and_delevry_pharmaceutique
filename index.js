@@ -5,6 +5,15 @@ const userRouter = require('./routers/user.router')
 const PharamacienRouter = require('./routers/pharmacien.route')
 const routerMedicament = require('./routers/medicament')
 
+const StockeRouter = require('./routers/stocke.route')
+const stockeModel = require('./model/stocke');
+
+const ReptureRouter = require('./routers/repture.route')
+const reptureModel = require('./model/repture');
+
+const AchatRouter = require('./routers/achat.route')
+const achatModel = require('./model/achat');
+
 const cors = require('cors');
 
 app.use(cors());
@@ -19,6 +28,12 @@ app.use(body_parseer.json());
 app.use('/',userRouter);
 app.use('/',PharamacienRouter);
 app.use('/api',routerMedicament)
+app.use('/',StockeRouter);
+app.use('/',ReptureRouter);
+app.use('/',AchatRouter);
+const PharmacyRouter = require('./routers/pharmacy.route')
+const phModel = require('./model/pharmacy');
+app.use('/',PharmacyRouter );
 app.get('/',(req,res)=> {
     res.send("hello world")
     
