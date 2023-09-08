@@ -38,19 +38,52 @@ class _GroupPageState extends State<GroupPage> {
       print('Connected to the frontend');
       socket!.on("sendMsgServer", (msg) {
         print(msg);
-        if (msg["userId"] != widget.userId) {
+                    // String sender = msg["senderName"] == widget.username ? "Vous" : msg["senderName"];
+      String sender = msg["senderName"] ;
+            String msgContent = msg["msg"];
+
+      // if(sender== widget.username){
+      //   sender = "";
+      // }
+
+if (sender != widget.username) {
           setState(() {
             listMsg.add(
               MsgModel(
                 msg: msg["msg"],
                 type: msg["type"],
-                Sender: msg["senderName"] == widget.userId ? "Vous" : widget.username,
+                Sender: sender,
               ),
             );
-          });
+          }
+          );
         }
-      });
-    });
+// else{
+//           // Check if the message already exists in the list
+//   bool messageExists = listMsg.any((existingMsg) =>
+//       existingMsg.msg == msg["msg"] &&
+//       existingMsg.type == msg["type"] &&
+//       existingMsg.Sender == sender);
+//       if (!messageExists) {
+//           setState(() {
+//             listMsg.add(
+//               MsgModel(
+//                 msg: msg["msg"],
+//                 type: msg["type"],
+//                 Sender: sender,
+//               ),
+//             );
+//           }
+//           );
+//         }
+
+//         }
+
+
+      }
+      );
+    }
+    );
   }
 
   void sendMsg(String msg, String senderName) {

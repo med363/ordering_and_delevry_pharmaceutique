@@ -40,15 +40,41 @@ XFile? _selectedImage; // Declare the _selectedImage variable
   
   var _imageName;
 
-  Future<void> _pickImage() async {
-   XFile? imageFile = await ImagePicker().pickImage(source: ImageSource.camera);
+   Future<void> _pickImage() async {
+    XFile? imageFile = await ImagePicker().pickImage(source: ImageSource.camera);
 
     if (imageFile != null) {
       setState(() {
         _selectedImage = imageFile;
       });
+
+      // Call the backend API here for image validation
+      // _validateImage(imageFile.path);
     }
   }
+
+  // // Future<bool> _validateImage(String imagePath) async {
+  // //   FirebaseVisionImage visionImage = FirebaseVisionImage.fromFilePath(imagePath);
+  // //   TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
+
+  // //   VisionText visionText = await textRecognizer.processImage(visionImage);
+
+  // //   textRecognizer.close();
+
+  // //   bool containsSpecificText = false;
+  // //   for (TextBlock block in visionText.blocks) {
+  // //     if (block.text!.contains('CARTE PROFESSIONNEL ELECTRONIQUE DU MEDECIN')) {
+  // //       containsSpecificText = true;
+  // //       break;
+  // //     }
+  // //   }
+
+  //   return containsSpecificText;
+  // }
+
+ 
+
+
 
   bool _isPasswordMatch() {
     return passwordController.text == confirmPasswordController.text;
@@ -66,6 +92,12 @@ Future<void> registerPharmacie() async {
       print("Image is not selected");
       return;
     }
+        // Validate image before proceeding with registration and upload
+    // bool imageIsValid = await _validateImage(_selectedImage!.path);
+    // if (!imageIsValid) {
+    //   return; // Abort registration if image validation fails
+    // }
+
 
     if (nameController.text.isEmpty ||
         phoneController.text.isEmpty ||
@@ -773,3 +805,4 @@ FadeAnimation(
         ));
   }
 }
+
