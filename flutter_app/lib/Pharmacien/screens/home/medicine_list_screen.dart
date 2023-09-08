@@ -5,10 +5,12 @@ import 'dart:convert';
 import 'RepturePharmacyScreen.dart';
 import 'StockePharmacyScreen.dart';
 import 'Vente_liste.dart';
+import 'add_medication_page.dart';
+import 'list_medication_page.dart';
+
 class MedicineListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: Replace this with the actual list of medicines in your app.
     final List<Map<String, dynamic>> medicines = [
       {'name': 'Stocke du pharmacie', 'icon': Icons.local_pharmacy},
       {'name': 'Listes des ventes', 'icon': Icons.shopping_cart},
@@ -16,8 +18,8 @@ class MedicineListScreen extends StatelessWidget {
       {'name': 'Tester les medicament', 'icon': Icons.medical_services},
       {'name': 'Ajouter des medicament', 'icon': Icons.add_circle_outline},
       {'name': 'Liste medicament', 'icon': Icons.edit},
-     // {'name': 'Supprimer des medicament', 'icon': Icons.delete},
     ];
+
     //stocke
 Future<void> _showStockePharmacy(BuildContext context) async {
     final response = await http.get(Uri.parse(all_stocks));
@@ -73,8 +75,9 @@ Future<void> showVenteOptions(BuildContext context) async {
       print('Failed to fetch stock from the server.');
     }
   }
- 
- return Scaffold(
+  
+
+    return Scaffold(
       appBar: AppBar(
         title: Text('Medicaments en vente'),
       ),
@@ -88,17 +91,28 @@ Future<void> showVenteOptions(BuildContext context) async {
               } else if (medicines[index]['name'] == 'Listes des Reptures') {
                 _showRepturePharmacy(context);
               } else if (medicines[index]['name'] == 'Listes des ventes') {
-              showVenteOptions(context);
-              } 
-              
-               else {
+                showVenteOptions(context);
+              } else if (medicines[index]['name'] == 'Ajouter des medicament') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddMedicationPage(),
+                  ),
+                );
+              } else if (medicines[index]['name'] == 'Liste medicament') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListMedicalPage(),
+                  ),
+                );
+              } else {
                 print('Clicked on ${medicines[index]['name']}');
               }
             },
             child: ListTile(
               leading: Icon(medicines[index]['icon']),
               title: Text(medicines[index]['name']),
-              // Add other details about the medicine here if needed.
             ),
           );
         },
@@ -106,6 +120,3 @@ Future<void> showVenteOptions(BuildContext context) async {
     );
   }
 }
-
-
-

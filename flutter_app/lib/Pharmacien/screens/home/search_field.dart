@@ -9,6 +9,7 @@ import 'PharmacyLocationMapScreen.dart';
 import 'ModifyPharmacyLocationPage.dart';
 import 'DeclaratioPharmacy.dart';
 import 'StockagePharmacy.dart';
+import 'list_medication_page.dart';
 
 
 class Category {
@@ -214,6 +215,7 @@ class SearchField extends StatelessWidget {
   }
 
 // Function to show the medication options dialog
+// Function to show the medication options dialog
   void showMedicationOptions(BuildContext context) {
     showDialog(
       context: context,
@@ -260,55 +262,62 @@ class SearchField extends StatelessWidget {
                   style: TextStyle(fontSize: 20),
                 ),
               ),
-              SizedBox(height: 15), // Add spacing between buttons
-              ElevatedButton(
-                onPressed: () {
-                  // Handle "Modifier Médicament" action here
-                  log('Modifier Médicament');
-                  Navigator.pop(context);
-                  // Close the dialog
-                },
-                style: ElevatedButton.styleFrom(
-                  primary:
-                      Colors.white, // Use white color for the button background
-                  onPrimary: Color.fromARGB(
-                      255, 21, 228, 66), // Use the green color for text
-                  side: BorderSide(
-                      color: Color.fromARGB(255, 21, 228, 66),
-                      width: 2), // Add a border to simulate the glass effect
-                ),
-                child: Text(
-                  'Modifier Médicament',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              SizedBox(height: 15), // Add spacing between buttons
-              ElevatedButton(
-                onPressed: () {
-                  // Handle "Supprimer Médicament" action here
-                  log('Supprimer Médicament');
-                  Navigator.pop(context); // Close the dialog
-                },
-                style: ElevatedButton.styleFrom(
-                  primary:
-                      Colors.white, // Use white color for the button background
-                  onPrimary: Color.fromARGB(
-                      255, 21, 228, 66), // Use the green color for text
-                  side: BorderSide(
-                      color: Color.fromARGB(255, 21, 228, 66),
-                      width: 2), // Add a border to simulate the glass effect
-                ),
-                child: Text(
-                  'Supprimer Médicament',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              SizedBox(height: 15), // Add spacing between buttons
+              SizedBox(height: 20), // Add spacing between buttons
+              // ElevatedButton(
+              //   onPressed: () {
+              //     // Handle "Modifier Médicament" action here
+              //     log('Modifier Médicament');
+              //     Navigator.pop(context);
+              //     // Close the dialog
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     primary:
+              //         Colors.white, // Use white color for the button background
+              //     onPrimary: Color.fromARGB(
+              //         255, 21, 228, 66), // Use the green color for text
+              //     side: BorderSide(
+              //         color: Color.fromARGB(255, 21, 228, 66),
+              //         width: 2), // Add a border to simulate the glass effect
+              //   ),
+              //   child: Text(
+              //     'Modifier Médicament',
+              //     style: TextStyle(fontSize: 20),
+              //   ),
+              // ),
+              // SizedBox(height: 15), // Add spacing between buttons
+              // ElevatedButton(
+              //   onPressed: () {
+              //     // Handle "Supprimer Médicament" action here
+              //     log('Supprimer Médicament');
+              //     Navigator.pop(context); // Close the dialog
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     primary:
+              //         Colors.white, // Use white color for the button background
+              //     onPrimary: Color.fromARGB(
+              //         255, 21, 228, 66), // Use the green color for text
+              //     side: BorderSide(
+              //         color: Color.fromARGB(255, 21, 228, 66),
+              //         width: 2), // Add a border to simulate the glass effect
+              //   ),
+              //   child: Text(
+              //     'Supprimer Médicament',
+              //     style: TextStyle(fontSize: 20),
+              //   ),
+              // ),
+              // SizedBox(height: 15), // Add spacing between buttons
               ElevatedButton(
                 onPressed: () {
                   // Handle "Modifier Médicament" action here
                   log('Liste Médicament');
-                  Navigator.pop(context); // Close the dialog
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ListMedicalPage(), // Navigate to the AddMedicationPage
+                    ),
+                  ); // Close the dialog 
                 },
                 style: ElevatedButton.styleFrom(
                   primary:
@@ -330,6 +339,9 @@ class SearchField extends StatelessWidget {
       },
     );
   }
+
+
+
 
 // Function to show the medication options dialog
   void showMedecinOptions(BuildContext context) {

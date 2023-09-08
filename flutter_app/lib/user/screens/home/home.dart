@@ -63,7 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
         SearchField(),
         const SizedBox(height: 10),
         SearchField1(),
-        const SizedBox(height: 24),
         SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
         const SizedBox(height: 24),
         MostPopularTitle(onTapseeAll: () => _onTapMostPopularSeeAll(context)),

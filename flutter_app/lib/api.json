@@ -1,0 +1,109 @@
+{
+    "pharmacies": [
+      {
+        "id": 1,
+        "name": "Pharmacie Santé Plus",
+        "address": "123 Rue de la Santé, 75001 Paris, France",
+        "location": {
+          "latitude": 48.8566,
+          "longitude": 2.3522
+        },
+        "medications": [
+          {
+            "id": 101,
+            "name": "Paracetamol",
+            "availability": true
+          },
+          {
+            "id": 102,
+            "name": "Ibuprofen",
+            "availability": true
+          },
+          {
+            "id": 103,
+            "name": "Loratadine",
+            "availability": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Pharmacie Bien-Être",
+        "address": "456 Avenue du Bonheur, 75002 Paris, France",
+        "location": {
+          "latitude": 48.864716,
+          "longitude": 2.349014
+        },
+        "medications": [
+          {
+            "id": 104,
+            "name": "Aspirin",
+            "availability": true
+          },
+          {
+            "id": 105,
+            "name": "Cetirizine",
+            "availability": true
+          },
+          {
+            "id": 106,
+            "name": "Omeprazole",
+            "availability": true
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Pharmacie Rapide Médicaments",
+        "address": "789 Boulevard de la Rapidité, 75003 Paris, France",
+        "location": {
+          "latitude": 48.8719,
+          "longitude": 2.3966
+        },
+        "medications": [
+          {
+            "id": 107,
+            "name": "Amoxicillin",
+            "availability": false
+          },
+          {
+            "id": 108,
+            "name": "Simvastatin",
+            "availability": true
+          },
+          {
+            "id": 109,
+            "name": "Metformin",
+            "availability": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Pharmacie de la Place",
+        "address": "10 Place de la Liberté, 75004 Paris, France",
+        "location": {
+          "latitude": 48.8575,
+          "longitude": 2.3524
+        },
+        "medications": [
+          {
+            "id": 110,
+            "name": "Antacid",
+            "availability": true
+          },
+          {
+            "id": 111,
+            "name": "Antibiotic Cream",
+            "availability": true
+          },
+          {
+            "id": 112,
+            "name": "Eye Drops",
+            "availability": true
+          }
+        ]
+      }
+    ]
+  }
+  

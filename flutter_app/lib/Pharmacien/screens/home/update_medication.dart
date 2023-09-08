@@ -1,33 +1,35 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class AddMedicationPage extends StatefulWidget {
+class ModifyMedicalPage extends StatefulWidget {
+  final dynamic medicalData;
+
+  const ModifyMedicalPage({Key? key, required this.medicalData})
+      : super(key: key);
+
   @override
-  _AddMedicationPageState createState() => _AddMedicationPageState();
+  _ModifyMedicalPageState createState() => _ModifyMedicalPageState();
 }
 
-class _AddMedicationPageState extends State<AddMedicationPage> {
-  // Create TextEditingController for form fields
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _dosageController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _manufacturerController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-  final TextEditingController _quantityController =
-      TextEditingController(); // New controller for quantity
+class _ModifyMedicalPageState extends State<ModifyMedicalPage> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _dosageController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _manufacturerController = TextEditingController();
+  TextEditingController _priceController = TextEditingController();
+  TextEditingController _quantityController = TextEditingController(); // New controller for quantity
 
   @override
-  void dispose() {
-    // Clean up the controllers when the page is disposed
-    _nameController.dispose();
-    _dosageController.dispose();
-    _descriptionController.dispose();
-    _manufacturerController.dispose();
-    _priceController.dispose();
-    _quantityController.dispose(); // Dispose the new controller
-    super.dispose();
+  void initState() {
+    super.initState();
+    // Initialize text fields with existing data
+    _nameController.text = widget.medicalData['name'] ?? '';
+    _dosageController.text = widget.medicalData['dosage'] ?? '';
+    _descriptionController.text = widget.medicalData['description'] ?? '';
+    _manufacturerController.text = widget.medicalData['fabricant'] ?? '';
+    _priceController.text = widget.medicalData['prix']?.toString() ?? '';
+    _quantityController.text = widget.medicalData['quantite']?.toString() ?? ''; // Initialize quantity field
   }
 
   @override
@@ -35,7 +37,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '💊 Ajouter des Médicaments 💊',
+          '💊 Modifier des Médicaments 💊',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -75,28 +77,21 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
             SizedBox(height: 10),
             TextFormField(
               controller: _priceController,
-              keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Prix'),
             ),
-            SizedBox(height: 10),
             TextFormField(
-              controller:
-                  _quantityController, // Use the new controller for quantity
+              controller: _quantityController, // Use the new controller for quantity
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Quantité'),
             ),
-            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                // Handle form submission and add the medication
                 String medicationName = _nameController.text;
                 String medicationDosage = _dosageController.text;
                 String medicationDescription = _descriptionController.text;
                 String medicationManufacturer = _manufacturerController.text;
                 String medicationPrice = _priceController.text;
-                int medicationQuantity =
-                    int.tryParse(_quantityController.text) ??
-                        0; // Get quantity value
+                int medicationQuantity = int.tryParse(_quantityController.text) ?? 0; // Get quantity value
 
                 // Create a map of medication data
                 Map<String, dynamic> medicationData = {
@@ -105,40 +100,35 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                   'description': medicationDescription,
                   'fabricant': medicationManufacturer,
                   'prix': medicationPrice,
-                  'quantite':
-                      medicationQuantity, // Include quantity in the data
+                  'quantite': medicationQuantity, // Include quantity in the data
                 };
 
-                // Convert the medicationData map to a JSON string
                 String jsonData = jsonEncode(medicationData);
 
-                // Perform the API call to post medication data to the server
-                final response = await http.post(
-                  Uri.parse('http://127.0.0.1:3000/api/create'),
+                String medicationId = widget.medicalData['_id'];
+
+                final response = await http.put(
+                  Uri.parse('http://127.0.0.1:3000/api/update/$medicationId'),
                   headers: {"Content-Type": "application/json"},
                   body: jsonData,
                 );
 
-                if (response.statusCode == 200 || response.statusCode == 201) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Medication added successfully'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                  Navigator.pop(
-                      context, true); // Navigate back after showing SnackBar
+                if (response.statusCode == 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Medication modified successfully'),
+          backgroundColor: Colors.green,
+        ),
+      );
+                  Navigator.pop(context, true); // Return true to indicate successful modification
                 } else {
-                  // Handle API error, you can show an error message or take appropriate action
                   debugPrint('API Error: ${response.body}');
                 }
-                print('Response Status Code: ${response.statusCode}');
-                print('Response Body: ${response.body}');
               },
               style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 21, 228, 66),
               ),
-              child: Text('Ajouter'),
+              child: Text('Save Changes'),
             ),
           ],
         ),
