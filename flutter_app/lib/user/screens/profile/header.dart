@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/user/screens/home/home.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  final String username;
+  
+  const ProfileHeader({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,10 @@ class ProfileHeader extends StatelessWidget {
               IconButton(
                 iconSize: 28,
                 icon: Image.asset('assets/icons/tabbar/light/more_circle@2x.png', scale: 2),
-                onPressed: () {},
+              onPressed: () {
+                // Navigate to the HomeScreen
+                Navigator.pushNamed(context, HomeScreen.route()); // Use the route() method to get the route
+              },
               ),
             ],
           ),
@@ -43,7 +49,7 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        const Text('Chadha Jamel', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+        Text(username, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)), // Utilisez le nom d'utilisateur passé en paramètre
         const SizedBox(height: 8),
         const SizedBox(height: 20),
         Container(

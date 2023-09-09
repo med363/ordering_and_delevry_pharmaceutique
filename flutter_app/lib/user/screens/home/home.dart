@@ -12,31 +12,29 @@ import 'package:flutter_app/user/screens/special_offers/special_offers_screen.da
 
 class HomeScreen extends StatefulWidget {
   final String title;
-  
-
+   final String username;
+   
   static String route() => '/home';
-
-  const HomeScreen({super.key, required this.title});
-
+  
+ HomeScreen({Key? key, required this.title, required this.username});
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   late final datas = homePopularProducts;
-  
+
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.fromLTRB(24, 24, 24, 0);
-//search title how pass proprieter
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-           const SliverPadding(
+         SliverPadding(
             padding: EdgeInsets.only(top: 24),
             sliver: SliverAppBar(
               pinned: true,
-              flexibleSpace:  HomeAppBar(),
+              flexibleSpace: HomeAppBar(username: widget.username),
             ),
           ),
           SliverPadding(

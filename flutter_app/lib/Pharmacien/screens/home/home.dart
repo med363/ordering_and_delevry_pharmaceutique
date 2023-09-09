@@ -7,10 +7,10 @@ import 'package:flutter_app/Pharmacien/screens/special_offers/special_offers_scr
 
 class HomeScreen extends StatefulWidget {
   final String title;
-
+  final String username;
   static String route() => '/home';
 
-  const HomeScreen({super.key, required this.title});
+  HomeScreen({super.key, required this.title,required this.username});
 
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
@@ -25,11 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          const SliverPadding(
+           SliverPadding(
             padding: EdgeInsets.only(top: 24),
             sliver: SliverAppBar(
               pinned: true,
-              flexibleSpace: HomeAppBar(email:'pharmacie'),
+              flexibleSpace: HomeAppBar(username: widget.username),
             ),
           ),
           SliverPadding(

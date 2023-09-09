@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
-import '../../user/provider/user_provider.dart';
 import '../Forgot Password/Forgot_Password_Screen.dart';
 import '../Sign Up Screen/SignUp_Screen.dart';
 import 'package:flutter_app/user/userpage.dart';
@@ -34,8 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = new TextEditingController();
   final _formKey = GlobalKey<FormState>(); // Added _formKey variable
 
-  
-
   bool _isNotValidate = false;
   // late SharedPreferences prefs;
   @override
@@ -50,77 +46,79 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
-  if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-    var reqBody = {
-      "email": emailController.text,
-      "password": passwordController.text,
-    };
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      var reqBody = {
+        "email": emailController.text,
+        "password": passwordController.text,
+      };
 
-    try {
-      // Attempt to log in as a user
-      var userResponse = await http.post(
-        Uri.parse(login_user),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(reqBody),
-      );
-
-      var userJsonResponse = jsonDecode(userResponse.body);
-      // final user= Provider.of<UserProvider>(context).user;
-
-      if (userResponse.statusCode == 200 && userJsonResponse['status']) {
-        // User login successful
-        var userToken = userJsonResponse['token'];
-
-    //    print('User Name: $user'); // Debug print
-        print('User token: $userToken'); // Debug print
-
-        // prefs.setString('token', userToken);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => userpageApp(
-          //  email: emailController.text, // Pass the email as a parameter
-
-          )),
+      try {
+        // Attempt to log in as a user
+        var userResponse = await http.post(
+          Uri.parse(login_user),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(reqBody),
         );
-        print('User login successful');
-      } else {
-        // Handle login failure for user
-        print('User login failed');
+
+        var userJsonResponse = jsonDecode(userResponse.body);
+
+        if (userResponse.statusCode == 200 && userJsonResponse['status']) {
+          // User login successful
+var userToken = userJsonResponse['token'];
+            var username = userJsonResponse['username'];          
+          // prefs.setString('token', userToken);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  userpageApp(username: username),
+            ),
+          );
+
+          print('User login successful');
+        } else {
+          // Handle login failure for user
+          print('User login failed');
+        }
+      } catch (e) {
+        // Handle exception during user login
+        print('Error during user login: $e');
       }
-    } catch (e) {
-      // Handle exception during user login
-      print('Error during user login: $e');
-    }
 
-    try {
-      // Attempt to log in as a pharmacy
-      var pharmacyResponse = await http.post(
-        Uri.parse(login_pharmacien),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(reqBody),
-      );
-
-      var pharmacyJsonResponse = jsonDecode(pharmacyResponse.body);
-
-      if (pharmacyResponse.statusCode == 200 && pharmacyJsonResponse['status']) {
-        // Pharmacy login successful
-        var pharmacyToken = pharmacyJsonResponse['token'];
-        // prefs.setString('token', pharmacyToken);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => pharmacienpageApp()),
+      try {
+        // Attempt to log in as a pharmacy
+        var pharmacyResponse = await http.post(
+          Uri.parse(login_pharmacien),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(reqBody),
         );
-        print('Pharmacy login successful');
-      } else {
-        // Handle login failure for pharmacy
-        print('Pharmacy login failed');
+
+        var pharmacyJsonResponse = jsonDecode(pharmacyResponse.body);
+
+        if (pharmacyResponse.statusCode == 200 &&
+            pharmacyJsonResponse['status']) {
+          // Pharmacy login successful
+          var pharmacyToken = pharmacyJsonResponse['token'];
+                      var username = pharmacyJsonResponse['username'];          
+
+          // prefs.setString('token', pharmacyToken);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context)
+             => pharmacienpageApp(username: username),
+            ),
+          );
+          print('Pharmacy login successful');
+        } else {
+          // Handle login failure for pharmacy
+          print('Pharmacy login failed');
+        }
+      } catch (e) {
+        // Handle exception during pharmacy login
+        print('Error during pharmacy login: $e');
       }
-    } catch (e) {
-      // Handle exception during pharmacy login
-      print('Error during pharmacy login: $e');
     }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -199,52 +197,49 @@ class _LoginScreenState extends State<LoginScreen> {
                                       : backgroundColor,
                                 ),
                                 child: Form(
-                                  key:_formKey ,
-                                  child: Padding(padding:
-                                  const EdgeInsets.all(5.0), 
-                                  child: TextField(
-                                  controller: emailController,
-                                  onTap: () {
-                                    setState(() {
-                                      selected = FormData.Email;
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    border: InputBorder.none,
-                                    prefixIcon: Icon(
-                                      Icons.email_outlined,
-                                      color: selected == FormData.Email
-                                          ? enabledtxt
-                                          : deaible,
-                                      size: 20,
-                                    ),
-                                    hintText: 'Email',
-                                    hintStyle: TextStyle(
-                                        color: selected == FormData.Email
-                                            ? enabledtxt
-                                            : deaible,
-                                        fontSize: 12),
-                                  ),
-                                  textAlignVertical: TextAlignVertical.center,
-                                  style: TextStyle(
-                                      color: selected == FormData.Email
-                                          ? enabledtxt
-                                          : deaible,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                    //    validator: (value) {
-                                    //   if (value.isEmpty) {
-                                    //     return 'Please enter your email';
-                                    //   }
-                                    //   return null;
-                                    // },
-
-  
-                                  ),
-                                )
-                                
-                               ),
+                                    key: _formKey,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: TextField(
+                                        controller: emailController,
+                                        onTap: () {
+                                          setState(() {
+                                            selected = FormData.Email;
+                                          });
+                                        },
+                                        decoration: InputDecoration(
+                                          enabledBorder: InputBorder.none,
+                                          border: InputBorder.none,
+                                          prefixIcon: Icon(
+                                            Icons.email_outlined,
+                                            color: selected == FormData.Email
+                                                ? enabledtxt
+                                                : deaible,
+                                            size: 20,
+                                          ),
+                                          hintText: 'Email',
+                                          hintStyle: TextStyle(
+                                              color: selected == FormData.Email
+                                                  ? enabledtxt
+                                                  : deaible,
+                                              fontSize: 12),
+                                        ),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        style: TextStyle(
+                                            color: selected == FormData.Email
+                                                ? enabledtxt
+                                                : deaible,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12),
+                                        //    validator: (value) {
+                                        //   if (value.isEmpty) {
+                                        //     return 'Please enter your email';
+                                        //   }
+                                        //   return null;
+                                        // },
+                                      ),
+                                    )),
                               ),
                             ),
                             const SizedBox(

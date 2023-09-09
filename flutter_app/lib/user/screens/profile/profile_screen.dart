@@ -33,7 +33,9 @@ class ProfileOption {
 }
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String username;
+
+  const ProfileScreen({Key? key, required this.username}) : super(key: key);
 
   static String route() => '/profile';
 
@@ -111,11 +113,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverList(
+          SliverList(
             delegate: SliverChildListDelegate.fixed([
               Padding(
                 padding: EdgeInsets.only(top: 30),
-                child: ProfileHeader(),
+                child:ProfileHeader(username: widget.username),
               ),
             ]),
           ),

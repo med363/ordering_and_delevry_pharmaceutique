@@ -6,8 +6,8 @@ import 'package:flutter_app/Pharmacien/screens/special_offers/special_offers_scr
 import 'package:flutter_app/Pharmacien/screens/test/test_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  HomeScreen.route(): (context) => const HomeScreen(title: '123'),
+  HomeScreen.route(): (context) =>  HomeScreen(title: 'My Home', username: '',),
   SpecialOfferScreen.route(): (context) => const SpecialOfferScreen(),
-  ProfileScreen.route(): (context) => const ProfileScreen(),
+  ProfileScreen.route(): (context) =>  ProfileScreen(username: '',),
   TestScreen.route(): (context) => const TestScreen(),
 };
